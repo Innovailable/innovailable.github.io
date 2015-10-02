@@ -1,6 +1,6 @@
 [submodule "source/easy-signaling"]
 	path = source/easy-signaling
-	url = git@github.com:Innovailable/easy-signaling.git
+	url = https://github.com/Innovailable/easy-signaling.git
 [submodule "source/rtc-lib"]
 	path = source/rtc-lib
-	url = git@github.com:Innovailable/rtc-lib.git
+	url = https://github.com/Innovailable/rtc-lib.git
