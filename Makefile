@@ -1,15 +1,19 @@
 all: rtc-lib easy-signaling
 
+pull:
+	for i in source/*; do echo $i; git pull origin master; done
+	git add source/*
+
 rtc-lib:
 	rm -rf $@ && mkdir -p $@
 	make -C source/rtc-lib compile min doc
-	cp -a source/rtc-lib/doc/* source/rtc-lib/out/*.js rtc-lib/
+	cp -a source/rtc-lib/doc/* source/rtc-lib/out/*.js $@
 	git add -A $@
 
 easy-signaling:
 	rm -rf $@ && mkdir -p $@
 	make -C source/easy-signaling doc
-	cp -a source/easy-signaling/doc/* easy-signaling/
+	cp -a source/easy-signaling/doc/* $@
 	git add -A $@
 
 .PHONY: rtc-lib easy-signaling
