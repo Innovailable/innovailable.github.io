@@ -1,0 +1,651 @@
+{
+    "project": {},
+    "files": {
+        "src/signaling.coffee": {
+            "name": "src/signaling.coffee",
+            "modules": {
+                "easy-signaling": 1
+            },
+            "classes": {
+                "Channel": 1,
+                "Hotel": 1,
+                "Room": 1,
+                "Guest": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/websocket_channel.coffee": {
+            "name": "src/websocket_channel.coffee",
+            "modules": {},
+            "classes": {
+                "WebsocketChannel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "easy-signaling": {
+            "name": "easy-signaling",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Channel": 1,
+                "Hotel": 1,
+                "Room": 1,
+                "Guest": 1,
+                "WebsocketChannel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/websocket_channel.coffee",
+            "line": 3,
+            "description": "A simple signaling server for WebRTC applications"
+        }
+    },
+    "classes": {
+        "Channel": {
+            "name": "Channel",
+            "shortname": "Channel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "easy-signaling",
+            "file": "src/signaling.coffee",
+            "line": 21,
+            "description": "Concept of a channel connecting the client to the signaling server. This is not an actual class but the description of the interface used to represent the communication channels. For a reference implementation look at `WebsocketChannel`.\n\nThe interface expects JavaScript Objects to come in and out of the API. You most propably want to encode the messages on the transport channel, for example using JSON."
+        },
+        "Hotel": {
+            "name": "Hotel",
+            "shortname": "Hotel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "easy-signaling",
+            "namespace": "",
+            "file": "src/signaling.coffee",
+            "line": 69,
+            "description": "Manages `Room`s and its `Guest`s",
+            "is_constructor": 1,
+            "example": [
+                "\n    var hotel = new Hotel()\n    guest_a = hotel.create_guest(conn_a, 'room')\n    guest_b = hotel.create_guest(conn_b, 'room')"
+            ]
+        },
+        "Room": {
+            "name": "Room",
+            "shortname": "Room",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "easy-signaling",
+            "namespace": "",
+            "file": "src/signaling.coffee",
+            "line": 133,
+            "description": "A room containing and conencting `Guest`s. Can be created by a `Hotel` or used alone.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\n    var room = new Room()\n    guest_a = room.create_guest(conn_a)\n    guest_b = room.create_guest(conn_b)"
+            ]
+        },
+        "Guest": {
+            "name": "Guest",
+            "shortname": "Guest",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "easy-signaling",
+            "namespace": "",
+            "file": "src/signaling.coffee",
+            "line": 244,
+            "description": "A guest which might join a `Room`",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "conn",
+                    "description": "The connection to the guest",
+                    "type": "Channel"
+                },
+                {
+                    "name": "room_fun",
+                    "description": "Connection which will be called upon joining and which should return the Room to join",
+                    "type": "Function"
+                }
+            ]
+        },
+        "WebsocketChannel": {
+            "name": "WebsocketChannel",
+            "shortname": "WebsocketChannel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "easy-signaling",
+            "namespace": "",
+            "file": "src/websocket_channel.coffee",
+            "line": 3,
+            "description": "A signaling channel using WebSockets. Wraps around `ws` WebSockets. Reference implementation of a channel.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ws",
+                    "description": "The websocket connection with the client",
+                    "type": "WebSocket"
+                }
+            ],
+            "example": [
+                "\n    // using only one Room\n\n    var es = require('easy-signaling');\n    var ws = require('ws')\n\n    var wss = new ws.WebSocketServer({port: 8080, host: '0.0.0.0'})\n    var room = new es.Room();\n\n    wss.on('connection', function(ws) {\n      channel = new es.WebsocketChannel(ws);\n      room.create_guest(channel);\n    });",
+                "\n    // using Hotel to support multiple rooms based on the URL\n\n    var es = require('easy-signaling');\n    var ws = require('ws')\n\n    var wss = new ws.WebSocketServer({port: 8080, host: '0.0.0.0'})\n    var hotel = new es.Hotel();\n\n    wss.on('connection', function(ws) {\n      channel = new es.WebsocketChannel(ws);\n      hotel.create_guest(channel, ws.upgradeReq.url);\n    });"
+            ]
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src/signaling.coffee",
+            "line": 28,
+            "description": "A message was received. You might have to decode the data.",
+            "itemtype": "event",
+            "name": "message",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The decoded message",
+                    "type": "Object"
+                }
+            ],
+            "class": "Channel"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 33,
+            "description": "The connection was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "Channel"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 37,
+            "description": "An error occured with the underlying connection.",
+            "itemtype": "event",
+            "name": "error",
+            "params": [
+                {
+                    "name": "error",
+                    "description": "The error which occured",
+                    "type": "Error"
+                }
+            ],
+            "class": "Channel"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 42,
+            "description": "Send data to the client. You might have to encode the data for transmission.",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The message to be sent",
+                    "type": "Object"
+                }
+            ],
+            "class": "Channel"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 47,
+            "description": "Close the connection to the client",
+            "itemtype": "method",
+            "name": "close",
+            "class": "Channel"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 82,
+            "description": "A new room was created",
+            "itemtype": "event",
+            "name": "room_created",
+            "params": [
+                {
+                    "name": "room",
+                    "description": "The new room",
+                    "type": "Room"
+                }
+            ],
+            "class": "Hotel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 88,
+            "description": "A new room was removed because all guests left",
+            "itemtype": "event",
+            "name": "room_removed",
+            "params": [
+                {
+                    "name": "room",
+                    "description": "The empty room",
+                    "type": "Room"
+                }
+            ],
+            "class": "Hotel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 98,
+            "description": "Get a room. The room is created if it did not exist. Room will be removed when empty.",
+            "itemtype": "method",
+            "name": "get_room",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the room",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Room"
+            },
+            "class": "Hotel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 122,
+            "description": "Create a new guest which might join the room with the given name",
+            "itemtype": "method",
+            "name": "create_guest",
+            "params": [
+                {
+                    "name": "conn",
+                    "description": "The connection to the guest",
+                    "type": "Channel"
+                },
+                {
+                    "name": "room_name",
+                    "description": "The name of the room to join",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Guest"
+            },
+            "class": "Hotel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 147,
+            "description": "A guest joined the room",
+            "itemtype": "event",
+            "name": "guest_joined",
+            "params": [
+                {
+                    "name": "guest",
+                    "description": "The new guest",
+                    "type": "Guest"
+                }
+            ],
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 153,
+            "description": "A guest left the room",
+            "itemtype": "event",
+            "name": "guest_left",
+            "params": [
+                {
+                    "name": "guest",
+                    "description": "The leaving guest",
+                    "type": "Guest"
+                }
+            ],
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 159,
+            "description": "The room was left by all guests",
+            "itemtype": "event",
+            "name": "empty",
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 164,
+            "description": "The name of the room",
+            "itemtype": "property",
+            "name": "name",
+            "readonly": "",
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 170,
+            "description": "The current guests of the room",
+            "itemtype": "property",
+            "name": "guests",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 181,
+            "description": "Send a message to all guest except the sender",
+            "itemtype": "method",
+            "name": "broadcast",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "The message",
+                    "type": "Object"
+                },
+                {
+                    "name": "sender",
+                    "description": "The sender of the message who will be skipped",
+                    "type": "String"
+                }
+            ],
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 194,
+            "description": "Send a message to a guest",
+            "itemtype": "method",
+            "name": "send",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "The message",
+                    "type": "Object"
+                },
+                {
+                    "name": "recipient",
+                    "description": "The recipient of the message",
+                    "type": "String"
+                }
+            ],
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 205,
+            "description": "A guest joins the room",
+            "itemtype": "method",
+            "name": "join",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "guets",
+                    "description": "The guest which joins the room",
+                    "type": "Guest"
+                }
+            ],
+            "return": {
+                "description": "`true` if and only if the guest could join",
+                "type": "Boolean"
+            },
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 235,
+            "description": "Create a guest which might join the room",
+            "itemtype": "method",
+            "name": "create_guest",
+            "params": [
+                {
+                    "name": "conn",
+                    "description": "The connection to the guest",
+                    "type": "Channel"
+                }
+            ],
+            "class": "Room",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 254,
+            "description": "Guest joined a room",
+            "itemtype": "event",
+            "name": "joined",
+            "params": [
+                {
+                    "name": "room",
+                    "description": "The joined room",
+                    "type": "Room"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 260,
+            "description": "Guest left the room",
+            "itemtype": "event",
+            "name": "left",
+            "params": [
+                {
+                    "name": "room",
+                    "description": "The joined room",
+                    "type": "Room"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 266,
+            "description": "The status of the guest changed",
+            "itemtype": "event",
+            "name": "status_changed",
+            "params": [
+                {
+                    "name": "status",
+                    "description": "The new status",
+                    "type": "Object"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 272,
+            "description": "The unique identifier of the guest",
+            "itemtype": "property",
+            "name": "id",
+            "readonly": "",
+            "type": "String",
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 279,
+            "description": "The status object of the guest. Will only be available after joining.",
+            "itemtype": "property",
+            "name": "status",
+            "readonly": "",
+            "type": "Object",
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 293,
+            "description": "The guest receives data",
+            "itemtype": "method",
+            "name": "receive",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The incoming message",
+                    "type": "Object"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 366,
+            "description": "The guest sends data",
+            "itemtype": "method",
+            "name": "send",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The outgoing message",
+                    "type": "Object"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 376,
+            "description": "The guest encountered an error",
+            "itemtype": "method",
+            "name": "error",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "The",
+                    "description": "error which was encountered",
+                    "type": "Error"
+                }
+            ],
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/signaling.coffee",
+            "line": 399,
+            "description": "The connection to the guest is closing",
+            "itemtype": "method",
+            "name": "closing",
+            "access": "private",
+            "tagname": "",
+            "class": "Guest",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/websocket_channel.coffee",
+            "line": 40,
+            "description": "A message was received",
+            "itemtype": "event",
+            "name": "message",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The decoded message",
+                    "type": "Object"
+                }
+            ],
+            "class": "WebsocketChannel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/websocket_channel.coffee",
+            "line": 46,
+            "description": "The WebSocket was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "WebsocketChannel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/websocket_channel.coffee",
+            "line": 51,
+            "description": "An error occured with the WebSocket",
+            "itemtype": "event",
+            "name": "error",
+            "params": [
+                {
+                    "name": "error",
+                    "description": "The error which occured",
+                    "type": "Error"
+                }
+            ],
+            "class": "WebsocketChannel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/websocket_channel.coffee",
+            "line": 68,
+            "description": "Send data to the client",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The message to be sent",
+                    "type": "Object"
+                }
+            ],
+            "class": "WebsocketChannel",
+            "module": "easy-signaling"
+        },
+        {
+            "file": "src/websocket_channel.coffee",
+            "line": 77,
+            "description": "Close the connection to the client",
+            "itemtype": "method",
+            "name": "close",
+            "class": "WebsocketChannel",
+            "module": "easy-signaling"
+        }
+    ],
+    "warnings": []
+}

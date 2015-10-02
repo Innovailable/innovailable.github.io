@@ -9,7 +9,7 @@ rtc-lib:
 easy-signaling:
 	rm -rf $@ && mkdir -p $@
 	make -C source/easy-signaling doc
-	cp -a source/easy-signaling/doc rtc-lib/
+	cp -a source/easy-signaling/doc easy-signaling/
 	git add -A $@
 
 .PHONY: rtc-lib easy-signaling

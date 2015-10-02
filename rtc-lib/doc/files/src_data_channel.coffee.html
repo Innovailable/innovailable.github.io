@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/data_channel.coffee</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/rtc.DataChannel.html">rtc.DataChannel</a></li>
+                                <li><a href="../classes/rtc.internal.ChannelCollection.html">rtc.internal.ChannelCollection</a></li>
+                                <li><a href="../classes/rtc.internal.Deferred.html">rtc.internal.Deferred</a></li>
+                                <li><a href="../classes/rtc.internal.Promise.html">rtc.internal.Promise</a></li>
+                                <li><a href="../classes/rtc.internal.StreamCollection.html">rtc.internal.StreamCollection</a></li>
+                                <li><a href="../classes/rtc.LocalPeer.html">rtc.LocalPeer</a></li>
+                                <li><a href="../classes/rtc.MediaDomElement.html">rtc.MediaDomElement</a></li>
+                                <li><a href="../classes/rtc.Peer.html">rtc.Peer</a></li>
+                                <li><a href="../classes/rtc.PeerConnection.html">rtc.PeerConnection</a></li>
+                                <li><a href="../classes/rtc.RemotePeer.html">rtc.RemotePeer</a></li>
+                                <li><a href="../classes/rtc.Room.html">rtc.Room</a></li>
+                                <li><a href="../classes/rtc.signaling.Channel.html">rtc.signaling.Channel</a></li>
+                                <li><a href="../classes/rtc.signaling.MucSignaling.html">rtc.signaling.MucSignaling</a></li>
+                                <li><a href="../classes/rtc.signaling.MucSignalingPeer.html">rtc.signaling.MucSignalingPeer</a></li>
+                                <li><a href="../classes/rtc.signaling.PalavaSignaling.html">rtc.signaling.PalavaSignaling</a></li>
+                                <li><a href="../classes/rtc.signaling.PalavaSignalingPeer.html">rtc.signaling.PalavaSignalingPeer</a></li>
+                                <li><a href="../classes/rtc.signaling.Signaling.html">rtc.signaling.Signaling</a></li>
+                                <li><a href="../classes/rtc.signaling.SignalingPeer.html">rtc.signaling.SignalingPeer</a></li>
+                                <li><a href="../classes/rtc.signaling.WebSocketChannel.html">rtc.signaling.WebSocketChannel</a></li>
+                                <li><a href="../classes/rtc.Stream.html">rtc.Stream</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/rtc.html">rtc</a></li>
+                                <li><a href="../modules/rtc.internal.html">rtc.internal</a></li>
+                                <li><a href="../modules/rtc.signaling.html">rtc.signaling</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/data_channel.coffee</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+{Deferred,Promise} = require(&#x27;./internal/promise&#x27;)
+EventEmitter = require(&#x27;events&#x27;).EventEmitter
+
+###*
+# A wrapper for RTCDataChannel. Used to transfer custom data between peers.
+# @module rtc
+# @class rtc.DataChannel
+#
+# @constructor
+# @param {RTCDataChannel} channel The wrapped native data channel
+# @param {Number} [max_buffer] The size of the send buffer after which we will delay sending
+###
+class exports.DataChannel extends EventEmitter
+
+  ###*
+  # A new messages was received. Triggers only after &#x60;connect()&#x60; was called
+  # @event message
+  # @param data The data received
+  ###
+
+  ###*
+  # The channel was closed
+  # @event closed
+  ###
+
+  constructor: (@channel, @max_buffer=1024*10) -&gt;
+    @_connected = false
+    @_connect_queue = []
+
+    # buffer management
+
+    @_send_buffer = []
+
+    # event handling
+
+    @channel.onmessage = (event) =&gt;
+      if not @_connected
+        @_connect_queue.push(event.data)
+      else
+        @emit(&#x27;message&#x27;, event.data)
+
+    @channel.onclose = () =&gt;
+      @emit(&#x27;closed&#x27;)
+
+    # TODO: what to do with this?
+    @channel.onerror = (err) =&gt;
+      @emit(&#x27;error&#x27;, err)
+
+
+  ###*
+  # Connect to the DataChannel. You will receive messages and will be able to send after calling this.
+  # @method connect
+  # @return {Promise} Promise which resolves as soon as the DataChannel is open
+  ###
+  connect: () -&gt;
+    @_connected = true
+
+    for data in @_connect_queue
+      @emit(&#x27;message&#x27;, data)
+
+    delete @_connect_queue
+
+    return Promise.resolve()
+
+
+  ###*
+  # The label of the DataChannel used to distinguish multiple channels
+  # @method label
+  # @return {String} The label
+  ###
+  label: () -&gt;
+    return @channel.label
+
+
+  ###*
+  # Send data to the peer through the DataChannel
+  # @method send
+  # @param data The data to be transferred
+  # @return {Promise} Promise which will be resolved when the data was passed to the native data channel
+  ####
+  send: (data) -&gt;
+    if not @_connected
+      @connect()
+      console.log(&quot;Sending without being connected. Please call connect() on the data channel to start using it.&quot;)
+
+    defer = new Deferred()
+    @_send_buffer.push([data, defer])
+
+    if @_send_buffer.length == 1
+      @_actualSend()
+
+    return defer.promise
+
+
+  ###*
+  # Method which actually sends the data. Implements buffering
+  # @method _actualSend
+  # @private
+  ###
+  _actualSend: () -&gt;
+    if @channel.readyState == &#x27;open&#x27;
+      # actual sending
+      # TODO: help user with max package size?
+      while @_send_buffer.length
+        # should we keep sending right now?
+        if @channel.bufferedAmount &gt;= @max_buffer
+          # TODO: less cpu heavy timeout value?
+          setTimeout(@_actualSend.bind(@), 1)
+          return
+
+        [data, defer] = @_send_buffer[0]
+
+        try
+          @channel.send(data)
+        catch
+          # TODO: less cpu heavy and fail after some time?
+          # TODO: do not loop endless on fatal errors which do not close the channel
+          setTimeout(@_actualSend.bind(@), 1)
+          return
+
+        defer.resolve()
+
+        @_send_buffer.shift()
+
+    else
+      # fail the send promises
+      while @_send_buffer.length
+        [data, defer] = @_send_buffer.shift()
+        defer.reject(new Error(&quot;DataChannel closed&quot;))
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,1454 @@
+{
+    "project": {},
+    "files": {
+        "src/internal/channel_collection.coffee": {
+            "name": "src/internal/channel_collection.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.internal.ChannelCollection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/internal/promise.coffee": {
+            "name": "src/internal/promise.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.internal.Promise": 1,
+                "rtc.internal.Deferred": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/internal/stream_collection.coffee": {
+            "name": "src/internal/stream_collection.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.internal.StreamCollection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/signaling/muc_signaling.coffee": {
+            "name": "src/signaling/muc_signaling.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.signaling.MucSignalingPeer": 1,
+                "rtc.signaling.MucSignaling": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/signaling/palava_signaling.coffee": {
+            "name": "src/signaling/palava_signaling.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.signaling.PalavaSignalingPeer": 1,
+                "rtc.signaling.PalavaSignaling": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/signaling/signaling.coffee": {
+            "name": "src/signaling/signaling.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.signaling.Signaling": 1,
+                "rtc.signaling.SignalingPeer": 1,
+                "rtc.signaling.Channel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/signaling/web_socket_channel.coffee": {
+            "name": "src/signaling/web_socket_channel.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.signaling.WebSocketChannel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/compat.coffee": {
+            "name": "src/compat.coffee",
+            "modules": {
+                "rtc.internal": 1,
+                "rtc.signaling": 1,
+                "rtc": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/data_channel.coffee": {
+            "name": "src/data_channel.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.DataChannel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/local_peer.coffee": {
+            "name": "src/local_peer.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.LocalPeer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/peer.coffee": {
+            "name": "src/peer.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.Peer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/peer_connection.coffee": {
+            "name": "src/peer_connection.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.PeerConnection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/remote_peer.coffee": {
+            "name": "src/remote_peer.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.RemotePeer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/room.coffee": {
+            "name": "src/room.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.Room": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/stream.coffee": {
+            "name": "src/stream.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.Stream": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/video_element.coffee": {
+            "name": "src/video_element.coffee",
+            "modules": {},
+            "classes": {
+                "rtc.MediaDomElement": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "rtc.internal": {
+            "name": "rtc.internal",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "rtc.internal.ChannelCollection": 1,
+                "rtc.internal.Promise": 1,
+                "rtc.internal.Deferred": 1,
+                "rtc.internal.StreamCollection": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "main",
+            "file": "src/internal/stream_collection.coffee",
+            "line": 4,
+            "description": "Internal helpers",
+            "is_constructor": 1,
+            "itemtype": "main"
+        },
+        "rtc.signaling": {
+            "name": "rtc.signaling",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "rtc.signaling.MucSignalingPeer": 1,
+                "rtc.signaling.MucSignaling": 1,
+                "rtc.signaling.PalavaSignalingPeer": 1,
+                "rtc.signaling.PalavaSignaling": 1,
+                "rtc.signaling.Signaling": 1,
+                "rtc.signaling.SignalingPeer": 1,
+                "rtc.signaling.Channel": 1,
+                "rtc.signaling.WebSocketChannel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "main",
+            "file": "src/signaling/web_socket_channel.coffee",
+            "line": 5,
+            "description": "Signaling and signaling channels",
+            "itemtype": "main"
+        },
+        "rtc": {
+            "name": "rtc",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "rtc.DataChannel": 1,
+                "rtc.LocalPeer": 1,
+                "rtc.Peer": 1,
+                "rtc.PeerConnection": 1,
+                "rtc.RemotePeer": 1,
+                "rtc.Room": 1,
+                "rtc.Stream": 1,
+                "rtc.MediaDomElement": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "main",
+            "file": "src/video_element.coffee",
+            "line": 5,
+            "description": "Core functionality",
+            "itemtype": "main",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "channel",
+                    "description": "The wrapped native data channel",
+                    "type": "RTCDataChannel"
+                },
+                {
+                    "name": "max_buffer",
+                    "description": "The size of the send buffer after which we will delay sending",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "extends": "rtc.Peer"
+        }
+    },
+    "classes": {
+        "rtc.internal.ChannelCollection": {
+            "name": "rtc.internal.ChannelCollection",
+            "shortname": "rtc.internal.ChannelCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.internal",
+            "namespace": "",
+            "file": "src/internal/channel_collection.coffee",
+            "line": 4,
+            "description": "Helper which handles DataChannel negotiation for RemotePeer"
+        },
+        "rtc.internal.Promise": {
+            "name": "rtc.internal.Promise",
+            "shortname": "rtc.internal.Promise",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.internal",
+            "namespace": "",
+            "file": "src/internal/promise.coffee",
+            "line": 1,
+            "description": "Alias for native promises or a polyfill if not supported"
+        },
+        "rtc.internal.Deferred": {
+            "name": "rtc.internal.Deferred",
+            "shortname": "rtc.internal.Deferred",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.internal",
+            "namespace": "",
+            "file": "src/internal/promise.coffee",
+            "line": 8,
+            "description": "Helper to implement deferred execution with promises"
+        },
+        "rtc.internal.StreamCollection": {
+            "name": "rtc.internal.StreamCollection",
+            "shortname": "rtc.internal.StreamCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.internal",
+            "namespace": "",
+            "file": "src/internal/stream_collection.coffee",
+            "line": 4,
+            "description": "Helper handling the mapping of streams for RemotePeer"
+        },
+        "rtc.signaling.MucSignalingPeer": {
+            "name": "rtc.signaling.MucSignalingPeer",
+            "shortname": "rtc.signaling.MucSignalingPeer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/muc_signaling.coffee",
+            "line": 4,
+            "description": "Signaling peer for multi user chats.\n\nFor a detailed description of the signaling protocol see `rtc.signaling.MucSignaling`"
+        },
+        "rtc.signaling.MucSignaling": {
+            "name": "rtc.signaling.MucSignaling",
+            "shortname": "rtc.signaling.MucSignaling",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/muc_signaling.coffee",
+            "line": 52,
+            "description": "Signaling for multi user chats\n\nThe following messages are sent to the server:\n\n    // join the room\n    {\n      \"type\": \"join\",\n      \"status\": {}\n    }\n\n    // leave the room\n    {\n      \"type\": \"leave\"\n    }\n\n    // update status\n    {\n      \"type\": \"status\",\n      \"status\": {}\n    }\n\n    // send message to a peer\n    {\n      \"type\": \"to\",\n      \"peer\": \"peer_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe following messages are received form the server:\n\n    // joined the room\n    {\n      \"type\": \"joined\",\n      \"peers\": {\n        \"peer_id\": { .. status .. }\n      }\n    }\n\n    // peer joined the room\n    {\n      \"type\": \"peer_joined\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // peer updated its status\n    {\n      \"type\": \"peer_status\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // peer left\n    {\n      \"type\": \"peer_left\",\n      \"peer\": \"peer_id\"\n    }\n\n    // message from peer\n    {\n      \"type\": \"from\",\n      \"peer\": \"peer_id\",\n      \"event\": \"event_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe messages transmitted in the `to`/`from` messages are emitted as events in `MucSignalingPeer`"
+        },
+        "rtc.signaling.PalavaSignalingPeer": {
+            "name": "rtc.signaling.PalavaSignalingPeer",
+            "shortname": "rtc.signaling.PalavaSignalingPeer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/palava_signaling.coffee",
+            "line": 5,
+            "description": "Signaling peer compatible with the framing of palava signaling"
+        },
+        "rtc.signaling.PalavaSignaling": {
+            "name": "rtc.signaling.PalavaSignaling",
+            "shortname": "rtc.signaling.PalavaSignaling",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/palava_signaling.coffee",
+            "line": 45,
+            "description": "Signaling implementation compatible with the framing of palava signaling"
+        },
+        "rtc.signaling.Signaling": {
+            "name": "rtc.signaling.Signaling",
+            "shortname": "rtc.signaling.Signaling",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/signaling.coffee",
+            "line": 1,
+            "description": "Concept of a class implementing signaling. Might use a `rtc.signaling.Channel` to abstract the connection to the server.\n\nYou do not have to extend this claass, just implement the functionality."
+        },
+        "rtc.signaling.SignalingPeer": {
+            "name": "rtc.signaling.SignalingPeer",
+            "shortname": "rtc.signaling.SignalingPeer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/signaling.coffee",
+            "line": 36,
+            "description": "Concept of a class implementing a signaling connection to a peer.\n\nYou do not have to extend this class, just implement the functionality."
+        },
+        "rtc.signaling.Channel": {
+            "name": "rtc.signaling.Channel",
+            "shortname": "rtc.signaling.Channel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/signaling.coffee",
+            "line": 47,
+            "description": "Concept of a class implementing a signaling channel. Might be used by signaling implementations to connect to a signaling server.\n\nYou do not have to extend this class, just implement the functionality."
+        },
+        "rtc.signaling.WebSocketChannel": {
+            "name": "rtc.signaling.WebSocketChannel",
+            "shortname": "rtc.signaling.WebSocketChannel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc.signaling",
+            "namespace": "",
+            "file": "src/signaling/web_socket_channel.coffee",
+            "line": 5
+        },
+        "rtc.DataChannel": {
+            "name": "rtc.DataChannel",
+            "shortname": "rtc.DataChannel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/data_channel.coffee",
+            "line": 4,
+            "description": "A wrapper for RTCDataChannel. Used to transfer custom data between peers."
+        },
+        "rtc.LocalPeer": {
+            "name": "rtc.LocalPeer",
+            "shortname": "rtc.LocalPeer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/local_peer.coffee",
+            "line": 4,
+            "description": "Represents the local user of the room"
+        },
+        "rtc.Peer": {
+            "name": "rtc.Peer",
+            "shortname": "rtc.Peer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/peer.coffee",
+            "line": 3,
+            "description": "A user in the room"
+        },
+        "rtc.PeerConnection": {
+            "name": "rtc.PeerConnection",
+            "shortname": "rtc.PeerConnection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/peer_connection.coffee",
+            "line": 9
+        },
+        "rtc.RemotePeer": {
+            "name": "rtc.RemotePeer",
+            "shortname": "rtc.RemotePeer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/remote_peer.coffee",
+            "line": 8,
+            "description": "Represents a remote user of the room"
+        },
+        "rtc.Room": {
+            "name": "rtc.Room",
+            "shortname": "rtc.Room",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/room.coffee",
+            "line": 10,
+            "description": "A virtual room which connects multiple Peers"
+        },
+        "rtc.Stream": {
+            "name": "rtc.Stream",
+            "shortname": "rtc.Stream",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/stream.coffee",
+            "line": 4,
+            "description": "A wrapper around an HTML5 MediaStream"
+        },
+        "rtc.MediaDomElement": {
+            "name": "rtc.MediaDomElement",
+            "shortname": "rtc.MediaDomElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "rtc",
+            "namespace": "",
+            "file": "src/video_element.coffee",
+            "line": 5
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 11,
+            "description": "A new data channel is available",
+            "itemtype": "event",
+            "name": "data_channel_added",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the channel",
+                    "type": "String"
+                },
+                {
+                    "name": "stream",
+                    "description": "Promise of the channel",
+                    "type": "Promise -> rtc.Stream"
+                }
+            ],
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 28,
+            "description": "Set the local channel description.",
+            "itemtype": "method",
+            "name": "setLocal",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Object describing each offered DataChannel",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 40,
+            "description": "Set the remote channel description.",
+            "itemtype": "method",
+            "name": "setRemote",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Object describing each offered DataChannel",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 52,
+            "description": "Matches remote and local descriptions and creates promises common DataChannels",
+            "itemtype": "method",
+            "name": "_update",
+            "access": "private",
+            "tagname": "",
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 102,
+            "description": "Resolves promises waiting for the given DataChannel",
+            "itemtype": "method",
+            "name": "resolve",
+            "params": [
+                {
+                    "name": "channel",
+                    "description": "The new channel",
+                    "type": "DataChannel"
+                }
+            ],
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/channel_collection.coffee",
+            "line": 117,
+            "description": "Get a promise to a DataChannel. Will resolve if DataChannel was offered and gets initiated. Might reject after remote and local description are processed.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The label of the channel to get",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise for the DataChannel",
+                "type": "Promise -> DataChannel"
+            },
+            "class": "rtc.internal.ChannelCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/promise.coffee",
+            "line": 13,
+            "description": "Resolves the promise",
+            "itemtype": "method",
+            "name": "resolve",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The payload to which the promise will resolve",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n    var defer = new Deferred()\n    defer.resolve(42);\n    defer.promise.then(function(res) {\n      console.log(res);   // 42\n    }"
+            ],
+            "class": "rtc.internal.Deferred",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/promise.coffee",
+            "line": 25,
+            "description": "Reject the promise",
+            "itemtype": "method",
+            "name": "reject",
+            "params": [
+                {
+                    "name": "error",
+                    "description": "The payload to which the promise will resolve",
+                    "type": "Error"
+                }
+            ],
+            "example": [
+                "\n    var defer = new Deferred()\n    defer.reject(new Error(\"Reject because we can!\"));\n    defer.promise.then(function(data) {\n      // wont happen\n    }).catch(function(err) {\n      // will happen\n    }"
+            ],
+            "class": "rtc.internal.Deferred",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/promise.coffee",
+            "line": 39,
+            "description": "The promise which will get resolved or rejected by this deferred",
+            "itemtype": "property",
+            "name": "promise",
+            "type": "Promise",
+            "class": "rtc.internal.Deferred",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/stream_collection.coffee",
+            "line": 13,
+            "description": "A new stream was added to the collection",
+            "itemtype": "event",
+            "name": "steam_added",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The user defined name of the stream",
+                    "type": "String"
+                },
+                {
+                    "name": "stream",
+                    "description": "Promise to the stream",
+                    "type": "Promise -> rtc.Stream"
+                }
+            ],
+            "class": "rtc.internal.StreamCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/stream_collection.coffee",
+            "line": 21,
+            "description": "Contains the promises which will resolve to the streams",
+            "itemtype": "property",
+            "name": "streams",
+            "type": "Object",
+            "class": "rtc.internal.StreamCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/stream_collection.coffee",
+            "line": 35,
+            "description": "Set stream description and generate promises",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "An object mapping the stream ids to stream names",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.internal.StreamCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/stream_collection.coffee",
+            "line": 97,
+            "description": "Add stream to the collection and resolve promises waiting for it",
+            "itemtype": "method",
+            "name": "resolve",
+            "params": [
+                {
+                    "name": "stream",
+                    "description": "",
+                    "type": "rtc.Stream"
+                }
+            ],
+            "class": "rtc.internal.StreamCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/internal/stream_collection.coffee",
+            "line": 120,
+            "description": "Gets a promise for a stream with the given name. Might be rejected after `update()`",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The promise for the `rtc.Stream`",
+                "type": "Promise"
+            },
+            "class": "rtc.internal.StreamCollection",
+            "module": "rtc.internal"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 11,
+            "description": "A new peer joined the room",
+            "itemtype": "event",
+            "name": "peer_joined",
+            "params": [
+                {
+                    "name": "peer",
+                    "description": "The new peer",
+                    "type": "rtc.signaling.SignalingPeer"
+                }
+            ],
+            "class": "rtc.signaling.Signaling",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 17,
+            "description": "The connection to the signaling server was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "rtc.signaling.Signaling",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 22,
+            "description": "Establishes the connection with the signaling server",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which is resolved when the connection is established",
+                "type": "Promise"
+            },
+            "class": "rtc.signaling.Signaling",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 29,
+            "description": "Closes the connection to the signaling server",
+            "itemtype": "method",
+            "name": "close",
+            "class": "rtc.signaling.Signaling",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 57,
+            "description": "A message was received from the signaling server",
+            "itemtype": "event",
+            "name": "message",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "The received message",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.signaling.Channel",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 63,
+            "description": "The connection to the signaling server was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "rtc.signaling.Channel",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 68,
+            "description": "Establishes the connection with the signaling server",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which is resolved when the connection is established",
+                "type": "Promise"
+            },
+            "class": "rtc.signaling.Channel",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 75,
+            "description": "Sends a message to the signaling server",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "The message to send",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Promise which is resolved when the message is sent",
+                "type": "Promise"
+            },
+            "class": "rtc.signaling.Channel",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 83,
+            "description": "Closes the connection to the signaling server",
+            "itemtype": "method",
+            "name": "close",
+            "class": "rtc.signaling.Channel",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 15,
+            "description": "A new messages was received. Triggers only after `connect()` was called",
+            "itemtype": "event",
+            "name": "message",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data received"
+                }
+            ],
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 21,
+            "description": "The channel was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 50,
+            "description": "Connect to the DataChannel. You will receive messages and will be able to send after calling this.",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which resolves as soon as the DataChannel is open",
+                "type": "Promise"
+            },
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 66,
+            "description": "The label of the DataChannel used to distinguish multiple channels",
+            "itemtype": "method",
+            "name": "label",
+            "return": {
+                "description": "The label",
+                "type": "String"
+            },
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 75,
+            "description": "Send data to the peer through the DataChannel",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data to be transferred"
+                }
+            ],
+            "return": {
+                "description": "Promise which will be resolved when the data was passed to the native data channel",
+                "type": "Promise"
+            },
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/data_channel.coffee",
+            "line": 95,
+            "description": "Method which actually sends the data. Implements buffering",
+            "itemtype": "method",
+            "name": "_actualSend",
+            "access": "private",
+            "tagname": "",
+            "class": "rtc.DataChannel",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 15,
+            "description": "Contains local streams offered to all remote peers",
+            "itemtype": "property",
+            "name": "streams",
+            "type": "Object",
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 22,
+            "description": "Contains all DataChannel configurations negotiated with all remote peers",
+            "itemtype": "property",
+            "name": "channels",
+            "type": "Object",
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 32,
+            "description": "Get an item of the status transferred to all remote peers",
+            "itemtype": "method",
+            "name": "status",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The key of the value. Will return",
+                    "type": "String"
+                }
+            ],
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 37,
+            "description": "Set an item of the status transferred to all remote peers",
+            "itemtype": "method",
+            "name": "status",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The key of the value. Will return",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to store"
+                }
+            ],
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 52,
+            "description": "Add data channel which will be negotiated with all remote peers",
+            "itemtype": "method",
+            "name": "addDataChannel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the data channel",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'data'"
+                },
+                {
+                    "name": "desc",
+                    "description": "Options passed to `RTCDataChannel.createDataChannel()`",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 74,
+            "description": "Add local stream to be sent to all remote peers",
+            "itemtype": "method",
+            "name": "addStream",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the stream",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'stream'"
+                },
+                {
+                    "name": "stream",
+                    "description": "The stream, a promise to the stream or the configuration to create a stream with `rtc.Stream.createStream()`",
+                    "type": "Promise -> rtc.Stream | rtc.Stream | Object"
+                }
+            ],
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/local_peer.coffee",
+            "line": 105,
+            "description": "Get local stream",
+            "itemtype": "method",
+            "name": "stream",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the stream",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'stream'"
+                }
+            ],
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer.coffee",
+            "line": 10,
+            "description": "The status of the peer has changed",
+            "itemtype": "event",
+            "name": "status_changed",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Key of the changed stats",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the changed status"
+                }
+            ],
+            "class": "rtc.Peer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer.coffee",
+            "line": 22,
+            "description": "Get a value of the status object",
+            "itemtype": "method",
+            "name": "status",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The key",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The value"
+            },
+            "class": "rtc.Peer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 22,
+            "description": "Message received from peer through signaling",
+            "itemtype": "event",
+            "name": "message",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The payload of the message"
+                }
+            ],
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 28,
+            "description": "The remote peer left or signaling closed",
+            "itemtype": "event",
+            "name": "left",
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 33,
+            "description": "A new stream is available from the peer",
+            "itemtype": "event",
+            "name": "stream_added",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the stream",
+                    "type": "String"
+                },
+                {
+                    "name": "stream",
+                    "description": "Promise of the stream",
+                    "type": "Promise -> rtc.Stream"
+                }
+            ],
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 40,
+            "description": "A new data channel is available from the peer",
+            "itemtype": "event",
+            "name": "data_channel_added",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the channel",
+                    "type": "String"
+                },
+                {
+                    "name": "stream",
+                    "description": "Promise of the channel",
+                    "type": "Promise -> rtc.Stream"
+                }
+            ],
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 124,
+            "description": "Send a message to the peer through signaling",
+            "itemtype": "method",
+            "name": "message",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The payload"
+                }
+            ],
+            "return": {
+                "description": "Promise which is resolved when the data was sent",
+                "type": "Promise"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 134,
+            "description": "Connect to the remote peer to exchange streams and create data channels",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which will resolved when the connection is established",
+                "type": "Promise"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 174,
+            "description": "Closes the connection to the peer",
+            "itemtype": "method",
+            "name": "close",
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 183,
+            "description": "Get a stream from the peer. Has to be sent by the remote peer to succeed.",
+            "itemtype": "method",
+            "name": "stream",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the stream",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'stream'"
+                }
+            ],
+            "return": {
+                "description": "Promise of the stream",
+                "type": "Promise -> rtc.Stream"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 193,
+            "description": "Get a data channel to the remote peer. Has to be added by local and remote side to succeed.",
+            "itemtype": "method",
+            "name": "channel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the data channel",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'data'"
+                }
+            ],
+            "return": {
+                "description": "Promise of the data channel",
+                "type": "Promise -> rtc.DataChannel"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 25,
+            "description": "A new peer is encountered in the room. Fires on new remote peers after joining and for all peers in the room when joining.",
+            "itemtype": "event",
+            "name": "peer_jopined",
+            "params": [
+                {
+                    "name": "peer",
+                    "description": "The new peer",
+                    "type": "rtc.RemotePeer"
+                }
+            ],
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 31,
+            "description": "The connection to the room was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 57,
+            "description": "Joins the room. Initiates connection to signaling server if not done before.",
+            "itemtype": "method",
+            "name": "join",
+            "return": {
+                "description": "A promise which will be resolved once the room was joined",
+                "type": "Promise"
+            },
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 69,
+            "description": "Leaves the room and closes all established peer connections",
+            "itemtype": "method",
+            "name": "leave",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 77,
+            "description": "Cleans up all resources used by the room.",
+            "itemtype": "method",
+            "name": "leave",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 17,
+            "description": "Get the id of the stream. This is neither user defined nor human readable.",
+            "itemtype": "method",
+            "name": "id",
+            "return": {
+                "description": "The id of the underlying stream",
+                "type": "String"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 26,
+            "description": "Checks whether the stream has any tracks of the given type",
+            "itemtype": "method",
+            "name": "hasTracks",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of track to check for",
+                    "type": "'audio' | 'video' | 'both'",
+                    "optional": true,
+                    "optdefault": "'both'"
+                }
+            ],
+            "return": {
+                "description": "The amount of tracks of the given type",
+                "type": "Number"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 36,
+            "description": "Gets the tracks of the given type",
+            "itemtype": "method",
+            "name": "getTracks",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of tracks to get",
+                    "type": "'audio' | 'video' | 'both'",
+                    "optional": true,
+                    "optdefault": "'both'"
+                }
+            ],
+            "return": {
+                "description": "An Array of the tracks",
+                "type": "Array"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 60,
+            "description": "Mutes or unmutes tracks of the stream",
+            "itemtype": "method",
+            "name": "mute",
+            "params": [
+                {
+                    "name": "muted",
+                    "description": "Mute on `true` and unmute on `false`",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                },
+                {
+                    "name": "type",
+                    "description": "The type of tracks to mute or unmute",
+                    "type": "'audio' | 'video' | 'both'",
+                    "optional": true,
+                    "optdefault": "'audio'"
+                }
+            ],
+            "return": {
+                "description": "Whether the tracks were muted or unmuted",
+                "type": "Boolean"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 74,
+            "description": "Toggles the mute state of tracks of the stream",
+            "itemtype": "method",
+            "name": "toggleMute",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of tracks to mute or unmute",
+                    "type": "'audio' | 'video' | 'both'",
+                    "optional": true,
+                    "optdefault": "'audio'"
+                }
+            ],
+            "return": {
+                "description": "Whether the tracks were muted or unmuted",
+                "type": "Boolean"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 91,
+            "description": "Stops the stream",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 99,
+            "description": "Creates a stream using `getUserMedia()`",
+            "itemtype": "method",
+            "name": "createStream",
+            "static": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration to pass to `getUserMedia()`",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "{audio: true, video: true}"
+                }
+            ],
+            "return": {
+                "description": "Promise to the stream",
+                "type": "Promise -> rtc.Stream"
+            },
+            "example": [
+                "\n    var stream = rtc.Stream.createStream({audio: true, video: false});\n    rtc.MediaDomElement($('video'), stream);"
+            ],
+            "class": "rtc.Stream",
+            "module": "rtc"
+        }
+    ],
+    "warnings": []
+}
