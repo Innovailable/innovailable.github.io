@@ -111,6 +111,7 @@
 # The interface expects JavaScript Objects to come in and out of the API. You most propably want to encode the messages on the transport channel, for example using JSON.
 #
 # @class Channel
+# @extends events.EventEmitter
 ###
 ###*
 # A message was received. You might have to decode the data.
@@ -140,8 +141,6 @@ uuid = require(&#x27;node-uuid&#x27;)
 
 EventEmitter = require(&#x27;events&#x27;).EventEmitter
 
-logger = require(&#x27;log4js&#x27;).getLogger()
-
 is_empty = (obj) -&gt;
   for _, _ of obj
     return false
@@ -156,6 +155,7 @@ is_empty = (obj) -&gt;
 ###*
 # Manages &#x60;Room&#x60;s and its &#x60;Guest&#x60;s
 # @class Hotel
+# @extends events.EventEmitter
 #
 # @constructor
 #
@@ -178,12 +178,18 @@ class Hotel extends EventEmitter
   # @param {Room} room The empty room
   ###
 
+  ###*
+  # An object containing the rooms with their names as keys
+  # @property rooms
+  # @private
+  ###
+
   constructor: () -&gt;
     @rooms = {}
 
 
   ###*
-  # Get a room. The room is created if it did not exist. Room will be removed when empty.
+  # Get a room. The room is created if it did not exist. The room will be removed when it throws &#x60;empty&#x60;.
   # @method get_room
   # @private
   # @param {String} name The name of the room
@@ -192,8 +198,6 @@ class Hotel extends EventEmitter
   get_room: (name) -&gt;
     if @rooms[name]?
       return @rooms[name]
-
-    logger.debug(&quot;Creating room &#x27;&quot; + name + &quot;&#x27;&quot;)
 
     room = @rooms[name] = new Room(name, this)
 
@@ -220,6 +224,7 @@ class Hotel extends EventEmitter
 ###*
 # A room containing and conencting &#x60;Guest&#x60;s. Can be created by a &#x60;Hotel&#x60; or used alone.
 # @class Room
+# @extends events.EventEmitter
 #
 # @constructor
 # @param {String} name
@@ -286,7 +291,11 @@ class Room extends EventEmitter
   # @param {String} recipient The recipient of the message
   ###
   send: (msg, recipient) -&gt;
-    @guests[recipient]?.send(msg)
+    if @guests[recipient]
+      @guests[recipient].send(msg)
+      return true
+    else
+      return false
 
 
   ###*
@@ -306,7 +315,6 @@ class Room extends EventEmitter
 
     guest.on &#x27;left&#x27;, () =&gt;
       if not @guests[guest.id]?
-        logger.error(&quot;Guest is trying to leave without being in the room&quot;)
         return
 
       delete @guests[guest.id]
@@ -329,8 +337,12 @@ class Room extends EventEmitter
 
 
 ###*
-# A guest which might join a &#x60;Room&#x60;
+# A guest which might join a &#x60;Room&#x60;.
+#
+# It will join the room once the client sends &#x27;join&#x27; and and leave once it emits the &#x27;left&#x27; event.
+#
 # @class Guest
+# @extends events.EventEmitter
 #
 # @constructor
 # @param {Channel} conn The connection to the guest
@@ -430,7 +442,8 @@ class Guest extends EventEmitter
           return
 
         # pass on
-        @room.send({type: &#x27;from&#x27;, peer: @id, event: data.event, data: data.data}, data.peer)
+        if not @room.send({type: &#x27;from&#x27;, peer: @id, event: data.event, data: data.data}, data.peer)
+          @error(&quot;Trying to send to unknown peer&quot;)
 
       when &#x27;status&#x27;
         if not data.status?
@@ -444,7 +457,7 @@ class Guest extends EventEmitter
         @status = data.status
         @emit(&#x27;status_changed&#x27;, @status)
 
-        @room.broadcast({tpye: &#x27;peer_status&#x27;, peer: @id, status: data.status}, @id)
+        @room.broadcast({type: &#x27;peer_status&#x27;, peer: @id, status: data.status}, @id)
 
       when &#x27;leave&#x27;
         @conn.close()
@@ -473,14 +486,8 @@ class Guest extends EventEmitter
       msg: msg
     }
 
-    # tell log
-    logger.error(msg)
-
     # tell library user
     #@emit(&#x27;error&#x27;, msg)
-
-    # end it all
-    @conn.close()
 
 
   ###*

@@ -1,7 +1,7 @@
 all: rtc-lib easy-signaling
 
 pull:
-	for i in source/*; do echo $i; git fetch && git checkout origin/master; done
+	for i in source/*; do cd $$i; git pull origin master; done
 	git add source/*
 
 rtc-lib:

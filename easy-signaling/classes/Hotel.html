@@ -84,9 +84,12 @@
 <h1>Hotel Class</h1>
 <div class="box meta">
 
+        <div class="extends">
+            Extends events.EventEmitter
+        </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_signaling.coffee.html#l69"><code>src&#x2F;signaling.coffee:69</code></a>
+            Defined in: <a href="../files/src_signaling.coffee.html#l68"><code>src&#x2F;signaling.coffee:68</code></a>
         </div>
 
             Module: <a href="../modules/easy-signaling.html">easy-signaling</a>
@@ -116,7 +119,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_signaling.coffee.html#l69"><code>src&#x2F;signaling.coffee:69</code></a>
+        <a href="../files/src_signaling.coffee.html#l68"><code>src&#x2F;signaling.coffee:68</code></a>
         </p>
 
 
@@ -148,6 +151,7 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
@@ -158,7 +162,7 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                             <li class="index-item method">
                                 <a href="#method_create_guest">create_guest</a>
 
@@ -170,12 +174,22 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property private">
+                                <a href="#property_rooms">rooms</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
                 <div class="index-section events">
                     <h3>Events</h3>
 
-                    <ul class="index-list events">
+                    <ul class="index-list events extends">
                             <li class="index-item event">
                                 <a href="#event_room_created">room_created</a>
 
@@ -218,7 +232,7 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_signaling.coffee.html#l122"><code>src&#x2F;signaling.coffee:122</code></a>
+        <a href="../files/src_signaling.coffee.html#l126"><code>src&#x2F;signaling.coffee:126</code></a>
         </p>
 
 
@@ -294,7 +308,7 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_signaling.coffee.html#l98"><code>src&#x2F;signaling.coffee:98</code></a>
+        <a href="../files/src_signaling.coffee.html#l104"><code>src&#x2F;signaling.coffee:104</code></a>
         </p>
 
 
@@ -302,7 +316,7 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
     </div>
 
     <div class="description">
-        <p>Get a room. The room is created if it did not exist. Room will be removed when empty.</p>
+        <p>Get a room. The room is created if it did not exist. The room will be removed when it throws <code>empty</code>.</p>
 
     </div>
 
@@ -336,6 +350,36 @@ guest_b = hotel.create_guest(conn_b, 'room')</code></pre>
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_rooms" class="property item private">
+    <h3 class="name"><code>rooms</code></h3>
+    <span class="type">Unknown</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_signaling.coffee.html#l94"><code>src&#x2F;signaling.coffee:94</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>An object containing the rooms with their names as keys</p>
+
+    </div>
+
+
+
+</div>
+            </div>
 
 
             <div id="events" class="api-class-tabpanel">
