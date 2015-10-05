@@ -103,15 +103,17 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 ###*
-# Alias for native promises or a polyfill if not supported
 # @module rtc.internal
+###
+
+###*
+# Alias for native promises or a polyfill if not supported
 # @class rtc.internal.Promise
 ###
 exports.Promise = global.Promise || require(&#x27;es6-promise&#x27;).Promise
 
 ###*
 # Helper to implement deferred execution with promises
-# @module rtc.internal
 # @class rtc.internal.Deferred
 ###
 ###*

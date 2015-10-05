@@ -103,17 +103,28 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 {Deferred} = require(&#x27;../internal/promise&#x27;)
+{Signaling,SignalingPeer} = require(&#x27;./signaling&#x27;)
 EventEmitter = require(&#x27;events&#x27;).EventEmitter
+
+###*
+# @module rtc.signaling
+###
 
 ###*
 # Signaling peer for multi user chats.
 #
 # For a detailed description of the signaling protocol see &#x60;rtc.signaling.MucSignaling&#x60;
 #
-# @module rtc.signaling
+# @extends rtc.signaling.SignalingPeer
 # @class rtc.signaling.MucSignalingPeer
+#
+# @constructor
+# @param {rtc.signaling.Channel} channel The channel to the siganling server
+# @param {String} peer_id The id of the remote peer
+# @param {Object} status The status of the remote peer
+# @param {Boolean} first Whether the local peer was in the room before the remote peer
 ###
-class exports.MucSignalingPeer extends EventEmitter
+class exports.MucSignalingPeer extends SignalingPeer
 
   constructor: (@channel, @peer_id, @status, @first) -&gt;
     recv_msg = (data) =&gt;
@@ -158,33 +169,37 @@ class exports.MucSignalingPeer extends EventEmitter
 #
 # The following messages are sent to the server:
 #
-#     // join the room
+#     // join the room. has to be sent before any other message.
+#     // response will be &#x27;joined&#x27; on success
+#     // other peers in the room will get &#x27;peer_joined&#x27;
 #     {
 #       &quot;type&quot;: &quot;join&quot;,
-#       &quot;status&quot;: {}
+#       &quot;status&quot;: { .. status .. }
 #     }
 #
-#     // leave the room
+#     // leave the room. server will close the connectino.
 #     {
 #       &quot;type&quot;: &quot;leave&quot;
 #     }
 #
-#     // update status
+#     // update status object
+#     // other peers will get &#x27;peer_status&#x27;
 #     {
 #       &quot;type&quot;: &quot;status&quot;,
-#       &quot;status&quot;: {}
+#       &quot;status&quot;: { .. status .. }
 #     }
 #
-#     // send message to a peer
+#     // send message to a peer. will be received as &#x27;to&#x27;
 #     {
 #       &quot;type&quot;: &quot;to&quot;,
 #       &quot;peer&quot;: &quot;peer_id&quot;,
+#       &quot;event&quot;: &quot;event_id&quot;,
 #       &quot;data&quot;: { .. custom data .. }
 #     }
 #
 # The following messages are received form the server:
 #
-#     // joined the room
+#     // joined the room. is the response to &#x27;join&#x27;
 #     {
 #       &quot;type&quot;: &quot;joined&quot;,
 #       &quot;peers&quot;: {
@@ -192,27 +207,27 @@ class exports.MucSignalingPeer extends EventEmitter
 #       }
 #     }
 #
-#     // peer joined the room
+#     // another peer joined the room.
 #     {
 #       &quot;type&quot;: &quot;peer_joined&quot;,
 #       &quot;peer&quot;: &quot;peer_id&quot;,
 #       &quot;status&quot;: { .. status .. }
 #     }
 #
-#     // peer updated its status
+#     // anosther peer updated its status object using &#x27;status&#x27;
 #     {
 #       &quot;type&quot;: &quot;peer_status&quot;,
 #       &quot;peer&quot;: &quot;peer_id&quot;,
 #       &quot;status&quot;: { .. status .. }
 #     }
 #
-#     // peer left
+#     // another peer left the room
 #     {
 #       &quot;type&quot;: &quot;peer_left&quot;,
 #       &quot;peer&quot;: &quot;peer_id&quot;
 #     }
 #
-#     // message from peer
+#     // message from another peer sent by &#x27;to&#x27;
 #     {
 #       &quot;type&quot;: &quot;from&quot;,
 #       &quot;peer&quot;: &quot;peer_id&quot;,
@@ -222,10 +237,14 @@ class exports.MucSignalingPeer extends EventEmitter
 #
 # The messages transmitted in the &#x60;to&#x60;/&#x60;from&#x60; messages are emitted as events in &#x60;MucSignalingPeer&#x60;
 #
-# @module rtc.signaling
+# @extends rtc.signaling.Signaling
 # @class rtc.signaling.MucSignaling
+#
+# @constructor
+# @param {rtc.signaling.Channel} channel The channel to the signaling server
+# @param {Object} status The status of the local peer
 ###
-class exports.MucSignaling extends EventEmitter
+class exports.MucSignaling extends Signaling
 
   constructor: (@channel, @status) -&gt;
     join_d = new Deferred()
