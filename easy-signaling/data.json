@@ -116,7 +116,7 @@
             "module": "easy-signaling",
             "namespace": "",
             "file": "src/signaling.coffee",
-            "line": 252,
+            "line": 254,
             "description": "A guest which might join a `Room`.\n\nIt will join the room once the client sends 'join' and and leave once it emits the 'left' event.",
             "extends": "events.EventEmitter",
             "is_constructor": 1,
@@ -128,7 +128,7 @@
                 },
                 {
                     "name": "room_fun",
-                    "description": "Connection which will be called upon joining and which should return the Room to join",
+                    "description": "Function which will be called upon joining and which should return the Room to join",
                     "type": "Function"
                 }
             ]
@@ -420,13 +420,17 @@
                     "type": "String"
                 }
             ],
+            "return": {
+                "description": "True if the recipient exists",
+                "type": "Boolean"
+            },
             "class": "Room",
             "module": "easy-signaling"
         },
         {
             "file": "src/signaling.coffee",
-            "line": 214,
-            "description": "A guest joins the room",
+            "line": 215,
+            "description": "A guest joins the room. Will be removed when it emits 'left'",
             "itemtype": "method",
             "name": "join",
             "access": "private",
@@ -447,7 +451,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 243,
+            "line": 244,
             "description": "Create a guest which might join the room",
             "itemtype": "method",
             "name": "create_guest",
@@ -458,12 +462,16 @@
                     "type": "Channel"
                 }
             ],
+            "return": {
+                "description": "",
+                "type": "Guest"
+            },
             "class": "Room",
             "module": "easy-signaling"
         },
         {
             "file": "src/signaling.coffee",
-            "line": 266,
+            "line": 268,
             "description": "Guest joined a room",
             "itemtype": "event",
             "name": "joined",
@@ -479,7 +487,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 272,
+            "line": 274,
             "description": "Guest left the room",
             "itemtype": "event",
             "name": "left",
@@ -495,7 +503,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 278,
+            "line": 280,
             "description": "The status of the guest changed",
             "itemtype": "event",
             "name": "status_changed",
@@ -511,7 +519,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 284,
+            "line": 286,
             "description": "The unique identifier of the guest",
             "itemtype": "property",
             "name": "id",
@@ -522,7 +530,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 291,
+            "line": 293,
             "description": "The status object of the guest. Will only be available after joining.",
             "itemtype": "property",
             "name": "status",
@@ -533,7 +541,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 305,
+            "line": 307,
             "description": "The guest receives data",
             "itemtype": "method",
             "name": "receive",
@@ -551,7 +559,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 379,
+            "line": 381,
             "description": "The guest sends data",
             "itemtype": "method",
             "name": "send",
@@ -569,7 +577,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 389,
+            "line": 391,
             "description": "The guest encountered an error",
             "itemtype": "method",
             "name": "error",
@@ -587,7 +595,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 406,
+            "line": 408,
             "description": "The connection to the guest is closing",
             "itemtype": "method",
             "name": "closing",
