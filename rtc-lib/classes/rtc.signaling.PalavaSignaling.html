@@ -101,9 +101,12 @@
 <h1>rtc.signaling.PalavaSignaling Class</h1>
 <div class="box meta">
 
+        <div class="extends">
+            Extends <a href="../classes/rtc.signaling.Signaling.html" class="crosslink">rtc.signaling.Signaling</a>
+        </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_signaling_palava_signaling.coffee.html#l47"><code>src&#x2F;signaling&#x2F;palava_signaling.coffee:47</code></a>
+            Defined in: <a href="../files/src_signaling_palava_signaling.coffee.html#l48"><code>src&#x2F;signaling&#x2F;palava_signaling.coffee:48</code></a>
         </div>
 
             Module: <a href="../modules/rtc.signaling.html">rtc.signaling</a>
@@ -121,20 +124,259 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method inherited">
+                                <a href="#method_close">close</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_connect">connect</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_setStatus">setStatus</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event inherited">
+                                <a href="#event_closed">closed</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_peer_joined">peer_joined</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_close" class="method item inherited">
+    <h3 class="name"><code>close</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/rtc.signaling.Signaling.html#method_close">rtc.signaling.Signaling</a>:
+        <a href="../files/src_signaling_signaling.coffee.html#l35"><code>src&#x2F;signaling&#x2F;signaling.coffee:35</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        Closes the connection to the signaling server
+    </div>
+
+
+
+
+</div>
+<div id="method_connect" class="method item inherited">
+    <h3 class="name"><code>connect</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/rtc.signaling.Signaling.html#method_connect">rtc.signaling.Signaling</a>:
+        <a href="../files/src_signaling_signaling.coffee.html#l28"><code>src&#x2F;signaling&#x2F;signaling.coffee:28</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        Establishes the connection with the signaling server
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    Promise which is resolved when the connection is established
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setStatus" class="method item inherited">
+    <h3 class="name"><code>setStatus</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>obj</code>
+                </li>
+            </ul><span class="paren">)</span>
         </div>
 
 
 
 
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/rtc.signaling.Signaling.html#method_setStatus">rtc.signaling.Signaling</a>:
+        <a href="../files/src_signaling_signaling.coffee.html#l41"><code>src&#x2F;signaling&#x2F;signaling.coffee:41</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        Sets the local status object and broadcasts the change to the peers
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        New status object
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+            </div>
+
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_closed" class="events item inherited">
+                        <h3 class="name"><code>closed</code></h3>
+                            <span class="paren">()</span>
+                    
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/rtc.signaling.Signaling.html#event_closed">rtc.signaling.Signaling</a>:
+                            <a href="../files/src_signaling_signaling.coffee.html#l23"><code>src&#x2F;signaling&#x2F;signaling.coffee:23</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The connection to the signaling server was closed
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_peer_joined" class="events item inherited">
+                        <h3 class="name"><code>peer_joined</code></h3>
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>peer</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/rtc.signaling.Signaling.html#event_peer_joined">rtc.signaling.Signaling</a>:
+                            <a href="../files/src_signaling_signaling.coffee.html#l17"><code>src&#x2F;signaling&#x2F;signaling.coffee:17</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            A new peer joined the room
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">peer</code>
+                                            <span class="type"><a href="../classes/rtc.signaling.SignalingPeer.html" class="crosslink">rtc.signaling.SignalingPeer</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            The new peer
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>

@@ -233,7 +233,7 @@
                         <code class="optional">[name=&#x27;data&#x27;]</code>
                 </li>
                 <li class="arg">
-                        <code class="optional">[desc]</code>
+                        <code class="optional">[desc={ordered: true}]</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -277,7 +277,7 @@
 
                 </li>
                 <li class="param">
-                        <code class="param-name optional">[desc]</code>
+                        <code class="param-name optional">[desc={ordered: true}]</code>
                         <span class="type">Object</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
 
@@ -308,6 +308,9 @@
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">Promise -> rtc.Stream</span>
+        </span>
 
 
 
@@ -360,6 +363,15 @@
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise -> rtc.Stream</span>:
+                    <p>Promise of the stream which was added</p>
+
+            </div>
+        </div>
 
 
 </div>
@@ -523,7 +535,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_local_peer.coffee.html#l108"><code>src&#x2F;local_peer.coffee:108</code></a>
+        <a href="../files/src_local_peer.coffee.html#l109"><code>src&#x2F;local_peer.coffee:109</code></a>
         </p>
 
 
@@ -632,10 +644,7 @@
                             <div class="args">
                                 <span class="paren">(</span><ul class="args-list inline commas">
                                     <li class="arg">
-                                            <code>key</code>
-                                    </li>
-                                    <li class="arg">
-                                            <code>value</code>
+                                            <code>status</code>
                                     </li>
                                 </ul><span class="paren">)</span>
                             </div>
@@ -660,26 +669,16 @@
                         </div>
                     
                             <div class="params">
-                                <h4>Event Payload:</h4>
+                                <h4>Parameters:</h4>
                     
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">key</code>
-                                            <span class="type">String</span>
-                    
-                    
-                                        <div class="param-description">
-                                            Key of the changed stats
-                                        </div>
-                    
-                                    </li>
-                                    <li class="param">
-                                            <code class="param-name">value</code>
+                                            <code class="param-name">status</code>
                                             <span class="type">Object</span>
                     
                     
                                         <div class="param-description">
-                                            Value of the changed status
+                                            The new status object
                                         </div>
                     
                                     </li>

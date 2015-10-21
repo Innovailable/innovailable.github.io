@@ -393,7 +393,7 @@
                 },
                 {
                     "name": "sender",
-                    "description": "The sender of the message who will be skipped",
+                    "description": "The id of the sender of the message (who will be skipped)",
                     "type": "String"
                 }
             ],

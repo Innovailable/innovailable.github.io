@@ -150,7 +150,7 @@ class exports.MucSignalingPeer extends SignalingPeer
 
         when &#x27;peer_status&#x27;
           @status = data.status
-          @emit(&#x27;new_status&#x27;, @status)
+          @emit(&#x27;status_changed&#x27;, @status)
 
     @channel.on(&#x27;message&#x27;, recv_msg)
 
@@ -242,11 +242,12 @@ class exports.MucSignalingPeer extends SignalingPeer
 #
 # @constructor
 # @param {rtc.signaling.Channel} channel The channel to the signaling server
-# @param {Object} status The status of the local peer
 ###
 class exports.MucSignaling extends Signaling
 
-  constructor: (@channel, @status) -&gt;
+  constructor: (@channel) -&gt;
+    @status = {}
+
     join_d = new Deferred()
     @join_p = join_d.promise
 

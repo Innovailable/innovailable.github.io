@@ -106,7 +106,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_remote_peer.coffee.html#l11"><code>src&#x2F;remote_peer.coffee:11</code></a>
+            Defined in: <a href="../files/src_remote_peer.coffee.html#l21"><code>src&#x2F;remote_peer.coffee:21</code></a>
         </div>
 
             Module: <a href="../modules/rtc.html">rtc</a>
@@ -151,7 +151,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l11"><code>src&#x2F;remote_peer.coffee:11</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l21"><code>src&#x2F;remote_peer.coffee:21</code></a>
         </p>
 
 
@@ -235,6 +235,14 @@
 
                     <ul class="index-list methods extends">
                             <li class="index-item method">
+                                <a href="#method_addDataChannel">addDataChannel</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_addStream">addStream</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_channel">channel</a>
 
                             </li>
@@ -294,6 +302,159 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_addDataChannel" class="method item">
+    <h3 class="name"><code>addDataChannel</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[name=&#x27;data&#x27;]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[desc={ordered: true}]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_remote_peer.coffee.html#l255"><code>src&#x2F;remote_peer.coffee:255</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Add data channel which will be negotiated with this remote peer</p>
+<p>If you use this method you have to set <code>auto_connect</code> to <code>false</code> in the options object and call <code>connect()</code> manually on all remote peers.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[name=&#x27;data&#x27;]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the data channel</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[desc={ordered: true}]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>Options passed to <code>RTCDataChannel.createDataChannel()</code></p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_addStream" class="method item">
+    <h3 class="name"><code>addStream</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[name=&#x27;stream&#x27;]</code>
+                </li>
+                <li class="arg">
+                        <code>stream</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise -> rtc.Stream</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_remote_peer.coffee.html#l208"><code>src&#x2F;remote_peer.coffee:208</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Add local stream to be sent to this remote peer</p>
+<p>If you use this method you have to set <code>auto_connect</code> to <code>false</code> in the options object and call <code>connect()</code> manually on all remote peers.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[name=&#x27;stream&#x27;]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the stream</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">stream</code>
+                        <span class="type">Promise -> rtc.Stream | <a href="../classes/rtc.Stream.html" class="crosslink">rtc.Stream</a> | Object</span>
+
+
+                    <div class="param-description">
+                        <p>The stream, a promise to the stream or the configuration to create a stream with <code>rtc.Stream.createStream()</code></p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise -> rtc.Stream</span>:
+                    <p>Promise of the stream which was added</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_channel" class="method item">
     <h3 class="name"><code>channel</code></h3>
 
@@ -318,7 +479,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l195"><code>src&#x2F;remote_peer.coffee:195</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l245"><code>src&#x2F;remote_peer.coffee:245</code></a>
         </p>
 
 
@@ -376,7 +537,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l176"><code>src&#x2F;remote_peer.coffee:176</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l189"><code>src&#x2F;remote_peer.coffee:189</code></a>
         </p>
 
 
@@ -410,7 +571,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l136"><code>src&#x2F;remote_peer.coffee:136</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l149"><code>src&#x2F;remote_peer.coffee:149</code></a>
         </p>
 
 
@@ -459,7 +620,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l126"><code>src&#x2F;remote_peer.coffee:126</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l139"><code>src&#x2F;remote_peer.coffee:139</code></a>
         </p>
 
 
@@ -525,7 +686,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/rtc.Peer.html#method_status">rtc.Peer</a>:
-        <a href="../files/src_peer.coffee.html#l24"><code>src&#x2F;peer.coffee:24</code></a>
+        <a href="../files/src_peer.coffee.html#l23"><code>src&#x2F;peer.coffee:23</code></a>
         </p>
 
 
@@ -590,7 +751,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l185"><code>src&#x2F;remote_peer.coffee:185</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l198"><code>src&#x2F;remote_peer.coffee:198</code></a>
         </p>
 
 
@@ -648,7 +809,7 @@
                                             <code>name</code>
                                     </li>
                                     <li class="arg">
-                                            <code>stream</code>
+                                            <code>channel</code>
                                     </li>
                                 </ul><span class="paren">)</span>
                             </div>
@@ -662,7 +823,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_remote_peer.coffee.html#l42"><code>src&#x2F;remote_peer.coffee:42</code></a>
+                            <a href="../files/src_remote_peer.coffee.html#l52"><code>src&#x2F;remote_peer.coffee:52</code></a>
                             </p>
                     
                     
@@ -674,7 +835,7 @@
                         </div>
                     
                             <div class="params">
-                                <h4>Event Payload:</h4>
+                                <h4>Parameters:</h4>
                     
                                 <ul class="params-list">
                                     <li class="param">
@@ -689,8 +850,8 @@
                     
                                     </li>
                                     <li class="param">
-                                            <code class="param-name">stream</code>
-                                            <span class="type">Promise -> rtc.Stream</span>
+                                            <code class="param-name">channel</code>
+                                            <span class="type">Promise -> rtc.DataChannel</span>
                     
                     
                                         <div class="param-description">
@@ -717,7 +878,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_remote_peer.coffee.html#l30"><code>src&#x2F;remote_peer.coffee:30</code></a>
+                            <a href="../files/src_remote_peer.coffee.html#l40"><code>src&#x2F;remote_peer.coffee:40</code></a>
                             </p>
                     
                     
@@ -750,7 +911,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_remote_peer.coffee.html#l24"><code>src&#x2F;remote_peer.coffee:24</code></a>
+                            <a href="../files/src_remote_peer.coffee.html#l34"><code>src&#x2F;remote_peer.coffee:34</code></a>
                             </p>
                     
                     
@@ -762,7 +923,7 @@
                         </div>
                     
                             <div class="params">
-                                <h4>Event Payload:</h4>
+                                <h4>Parameters:</h4>
                     
                                 <ul class="params-list">
                                     <li class="param">
@@ -786,10 +947,7 @@
                             <div class="args">
                                 <span class="paren">(</span><ul class="args-list inline commas">
                                     <li class="arg">
-                                            <code>key</code>
-                                    </li>
-                                    <li class="arg">
-                                            <code>value</code>
+                                            <code>status</code>
                                     </li>
                                 </ul><span class="paren">)</span>
                             </div>
@@ -815,27 +973,16 @@
                         </div>
                     
                             <div class="params">
-                                <h4>Event Payload:</h4>
+                                <h4>Parameters:</h4>
                     
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">key</code>
-                                            <span class="type">String</span>
-                    
-                    
-                                        <div class="param-description">
-                                            <p>Key of the changed stats</p>
-                    
-                                        </div>
-                    
-                                    </li>
-                                    <li class="param">
-                                            <code class="param-name">value</code>
+                                            <code class="param-name">status</code>
                                             <span class="type">Object</span>
                     
                     
                                         <div class="param-description">
-                                            <p>Value of the changed status</p>
+                                            <p>The new status object</p>
                     
                                         </div>
                     
@@ -867,7 +1014,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_remote_peer.coffee.html#l35"><code>src&#x2F;remote_peer.coffee:35</code></a>
+                            <a href="../files/src_remote_peer.coffee.html#l45"><code>src&#x2F;remote_peer.coffee:45</code></a>
                             </p>
                     
                     
@@ -879,7 +1026,7 @@
                         </div>
                     
                             <div class="params">
-                                <h4>Event Payload:</h4>
+                                <h4>Parameters:</h4>
                     
                                 <ul class="params-list">
                                     <li class="param">

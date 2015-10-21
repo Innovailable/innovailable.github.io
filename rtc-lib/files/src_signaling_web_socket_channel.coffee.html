@@ -103,18 +103,26 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 {Promise} = require(&#x27;../internal/promise&#x27;)
-EventEmitter = require(&#x27;events&#x27;).EventEmitter
+{Channel} = require(&#x27;./signaling&#x27;)
 
 ###*
 # @module rtc.signaling
 ###
 ###*
-# @module rtc.signaling
 # @class rtc.signaling.WebSocketChannel
+# @extends rtc.signaling.Channel
 ###
-class exports.WebSocketChannel extends EventEmitter
+class exports.WebSocketChannel extends Channel
 
-  constructor: (@address) -&gt;
+  constructor: (@address, parts...) -&gt;
+    if parts.length &gt; 0
+      # remove trailing slashes
+      while @address.endsWith(&#x27;/&#x27;)
+        @address = @address.substr(0, @address.length - 1)
+
+      # add parts
+      for part in parts
+        @address += &#x27;/&#x27; + encodeUriComponent(part)
 
 
   connect: () -&gt;

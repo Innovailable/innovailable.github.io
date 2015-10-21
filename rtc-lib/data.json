@@ -333,11 +333,6 @@
                     "name": "channel",
                     "description": "The channel to the signaling server",
                     "type": "rtc.signaling.Channel"
-                },
-                {
-                    "name": "status",
-                    "description": "The status of the local peer",
-                    "type": "Object"
                 }
             ]
         },
@@ -353,7 +348,8 @@
             "namespace": "",
             "file": "src/signaling/palava_signaling.coffee",
             "line": 9,
-            "description": "Signaling peer compatible with the framing of palava signaling"
+            "description": "Signaling peer compatible with the framing of palava signaling",
+            "extends": "rtc.signaling.SignalingPeer"
         },
         "rtc.signaling.PalavaSignaling": {
             "name": "rtc.signaling.PalavaSignaling",
@@ -366,8 +362,9 @@
             "module": "rtc.signaling",
             "namespace": "",
             "file": "src/signaling/palava_signaling.coffee",
-            "line": 47,
-            "description": "Signaling implementation compatible with the framing of palava signaling"
+            "line": 48,
+            "description": "Signaling implementation compatible with the framing of palava signaling",
+            "extends": "rtc.signaling.Signaling"
         },
         "rtc.signaling.Signaling": {
             "name": "rtc.signaling.Signaling",
@@ -395,7 +392,7 @@
             "module": "rtc.signaling",
             "namespace": "",
             "file": "src/signaling/signaling.coffee",
-            "line": 42,
+            "line": 49,
             "description": "Concept of a class implementing a signaling connection to a peer.\n\nYou do not have to extend this class, just implement the functionality.",
             "extends": "events.EventEmitter"
         },
@@ -410,7 +407,7 @@
             "module": "rtc.signaling",
             "namespace": "",
             "file": "src/signaling/signaling.coffee",
-            "line": 94,
+            "line": 101,
             "description": "Concept of a class implementing a signaling channel. Might be used by signaling implementations to connect to a signaling server.\n\nYou do not have to extend this class, just implement the functionality.",
             "extends": "events.EventEmitter"
         },
@@ -425,7 +422,8 @@
             "module": "rtc.signaling",
             "namespace": "",
             "file": "src/signaling/web_socket_channel.coffee",
-            "line": 7
+            "line": 7,
+            "extends": "rtc.signaling.Channel"
         },
         "rtc.DataChannel": {
             "name": "rtc.DataChannel",
@@ -496,7 +494,22 @@
             "module": "rtc",
             "namespace": "",
             "file": "src/peer_connection.coffee",
-            "line": 12
+            "line": 12,
+            "description": "Wrapper around native RTCPeerConnection\n\nProvides events for new streams and data channels. Signaling information has\nto be forwarded from events emitted by this object to the remote\nPeerConnection.",
+            "extends": "events.EventEmitter",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "offering",
+                    "description": "True if the local peer should initiate the connection",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "options",
+                    "description": "Options object passed on from `Room`",
+                    "type": "Object"
+                }
+            ]
         },
         "rtc.RemotePeer": {
             "name": "rtc.RemotePeer",
@@ -509,7 +522,7 @@
             "module": "rtc",
             "namespace": "",
             "file": "src/remote_peer.coffee",
-            "line": 11,
+            "line": 21,
             "description": "Represents a remote user of the room",
             "extends": "rtc.Peer",
             "is_constructor": 1,
@@ -908,7 +921,23 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 52,
+            "line": 41,
+            "description": "Sets the local status object and broadcasts the change to the peers",
+            "itemtype": "method",
+            "name": "setStatus",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "New status object",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.signaling.Signaling",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/signaling.coffee",
+            "line": 59,
             "description": "The remote peer left the room",
             "itemtype": "event",
             "name": "left",
@@ -917,7 +946,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 57,
+            "line": 64,
             "description": "Received a message from the remote peer",
             "itemtype": "event",
             "name": "message",
@@ -938,10 +967,10 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 64,
+            "line": 71,
             "description": "The status object of the remote peer was updated",
             "itemtype": "event",
-            "name": "new_status",
+            "name": "status_changed",
             "params": [
                 {
                     "name": "status",
@@ -954,7 +983,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 70,
+            "line": 77,
             "description": "The status object of the remote peer",
             "itemtype": "property",
             "name": "status",
@@ -965,7 +994,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 77,
+            "line": 84,
             "description": "Whether the local user was in the room before the remote user (used to determine which peer will initiate the connection)",
             "itemtype": "property",
             "name": "first",
@@ -976,7 +1005,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 84,
+            "line": 91,
             "description": "Sends the event with the given payload to the remote peer",
             "itemtype": "method",
             "name": "send",
@@ -1001,7 +1030,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 104,
+            "line": 111,
             "description": "A message was received from the signaling server",
             "itemtype": "event",
             "name": "message",
@@ -1017,7 +1046,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 110,
+            "line": 117,
             "description": "The connection to the signaling server was closed",
             "itemtype": "event",
             "name": "closed",
@@ -1026,7 +1055,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 115,
+            "line": 122,
             "description": "Establishes the connection with the signaling server",
             "itemtype": "method",
             "name": "connect",
@@ -1039,7 +1068,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 122,
+            "line": 129,
             "description": "Sends a message to the signaling server",
             "itemtype": "method",
             "name": "send",
@@ -1059,7 +1088,7 @@
         },
         {
             "file": "src/signaling/signaling.coffee",
-            "line": 130,
+            "line": 137,
             "description": "Closes the connection to the signaling server",
             "itemtype": "method",
             "name": "close",
@@ -1223,7 +1252,8 @@
                     "name": "desc",
                     "description": "Options passed to `RTCDataChannel.createDataChannel()`",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "{ordered: true}"
                 }
             ],
             "class": "rtc.LocalPeer",
@@ -1249,12 +1279,16 @@
                     "type": "Promise -> rtc.Stream | rtc.Stream | Object"
                 }
             ],
+            "return": {
+                "description": "Promise of the stream which was added",
+                "type": "Promise -> rtc.Stream"
+            },
             "class": "rtc.LocalPeer",
             "module": "rtc"
         },
         {
             "file": "src/local_peer.coffee",
-            "line": 108,
+            "line": 109,
             "description": "Get local stream",
             "itemtype": "method",
             "name": "stream",
@@ -1282,13 +1316,9 @@
             "name": "status_changed",
             "params": [
                 {
-                    "name": "key",
-                    "description": "Key of the changed stats",
-                    "type": "String"
-                },
-                {
-                    "name": "value",
-                    "description": "Value of the changed status"
+                    "name": "status",
+                    "description": "The new status object",
+                    "type": "Object"
                 }
             ],
             "class": "rtc.Peer",
@@ -1296,7 +1326,7 @@
         },
         {
             "file": "src/peer.coffee",
-            "line": 24,
+            "line": 23,
             "description": "Get a value of the status object",
             "itemtype": "method",
             "name": "status",
@@ -1314,8 +1344,287 @@
             "module": "rtc"
         },
         {
+            "file": "src/peer_connection.coffee",
+            "line": 28,
+            "description": "New local ICE candidate which should be signaled to remote peer",
+            "itemtype": "event",
+            "name": "ice_candiate",
+            "params": [
+                {
+                    "name": "candidate",
+                    "description": "The ice candidate",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 34,
+            "description": "New remote stream was added to the PeerConnection",
+            "itemtype": "event",
+            "name": "stream_added",
+            "params": [
+                {
+                    "name": "stream",
+                    "description": "The stream",
+                    "type": "rtc.Stream"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 40,
+            "description": "New DataChannel to the remote peer is ready to be used",
+            "itemtype": "event",
+            "name": "data_channel_ready",
+            "params": [
+                {
+                    "name": "channel",
+                    "description": "The data channel",
+                    "type": "rtc.DataChannel"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 46,
+            "description": "New offer or answer which should be signaled to the remote peer",
+            "itemtype": "event",
+            "name": "signaling",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "The signaling message",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 52,
+            "description": "The PeerConnection was closed",
+            "itemtype": "event",
+            "name": "closed",
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 104,
+            "description": "Add new signaling information received from remote peer",
+            "itemtype": "method",
+            "name": "signaling",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The signaling information",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 119,
+            "description": "Add a remote ICE candidate",
+            "itemtype": "method",
+            "name": "addIceCandidate",
+            "params": [
+                {
+                    "name": "desc",
+                    "description": "The candidate",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 133,
+            "description": "Returns the options for the offer/answer",
+            "itemtype": "method",
+            "name": "_oaOptions",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 149,
+            "description": "Set the remote description",
+            "itemtype": "method",
+            "name": "_setRemoteDescription",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "sdp",
+                    "description": "The remote SDP",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Promise which will be resolved once the remote description was set successfully",
+                "type": "Promise"
+            },
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 162,
+            "description": "Create offer, set it on local description and emit it",
+            "itemtype": "method",
+            "name": "_offer",
+            "access": "private",
+            "tagname": "",
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 176,
+            "description": "Create answer, set it on local description and emit it",
+            "itemtype": "method",
+            "name": "_offer",
+            "access": "private",
+            "tagname": "",
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 190,
+            "description": "Set local description and emit it",
+            "itemtype": "method",
+            "name": "_processLocalSdp",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "sdp",
+                    "description": "The local SDP",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Promise which will be resolved once the local description was set successfully",
+                "type": "Promise"
+            },
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 211,
+            "description": "Mark connection attempt as failed",
+            "itemtype": "method",
+            "name": "_connectError",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "Error causing connection to fail",
+                    "type": "Error"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 224,
+            "description": "Add local stream",
+            "itemtype": "method",
+            "name": "addStream",
+            "params": [
+                {
+                    "name": "stream",
+                    "description": "The local stream",
+                    "type": "rtc.Stream"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 233,
+            "description": "Remove local stream",
+            "itemtype": "method",
+            "name": "removeStream",
+            "params": [
+                {
+                    "name": "stream",
+                    "description": "The local stream",
+                    "type": "rtc.Stream"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 242,
+            "description": "Add DataChannel. Will only actually do something if `offering` is `true`.",
+            "itemtype": "method",
+            "name": "addDataChannel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the data channel",
+                    "type": "String"
+                },
+                {
+                    "name": "desc",
+                    "description": "Options passed to `RTCPeerConnection.createDataChannel()`",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 256,
+            "description": "Establish connection with remote peer. Connection will be established once both peers have called this functio",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which will be resolved once the connection is established",
+                "type": "Promise"
+            },
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
+            "file": "src/peer_connection.coffee",
+            "line": 275,
+            "description": "Close the connection to the remote peer",
+            "itemtype": "method",
+            "name": "close",
+            "class": "rtc.PeerConnection",
+            "module": "rtc"
+        },
+        {
             "file": "src/remote_peer.coffee",
-            "line": 24,
+            "line": 34,
             "description": "Message received from peer through signaling",
             "itemtype": "event",
             "name": "message",
@@ -1330,7 +1639,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 30,
+            "line": 40,
             "description": "The remote peer left or signaling closed",
             "itemtype": "event",
             "name": "left",
@@ -1339,7 +1648,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 35,
+            "line": 45,
             "description": "A new stream is available from the peer",
             "itemtype": "event",
             "name": "stream_added",
@@ -1360,7 +1669,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 42,
+            "line": 52,
             "description": "A new data channel is available from the peer",
             "itemtype": "event",
             "name": "data_channel_added",
@@ -1371,9 +1680,9 @@
                     "type": "String"
                 },
                 {
-                    "name": "stream",
+                    "name": "channel",
                     "description": "Promise of the channel",
-                    "type": "Promise -> rtc.Stream"
+                    "type": "Promise -> rtc.DataChannel"
                 }
             ],
             "class": "rtc.RemotePeer",
@@ -1381,7 +1690,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 126,
+            "line": 139,
             "description": "Send a message to the peer through signaling",
             "itemtype": "method",
             "name": "message",
@@ -1400,7 +1709,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 136,
+            "line": 149,
             "description": "Connect to the remote peer to exchange streams and create data channels",
             "itemtype": "method",
             "name": "connect",
@@ -1413,7 +1722,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 176,
+            "line": 189,
             "description": "Closes the connection to the peer",
             "itemtype": "method",
             "name": "close",
@@ -1422,7 +1731,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 185,
+            "line": 198,
             "description": "Get a stream from the peer. Has to be sent by the remote peer to succeed.",
             "itemtype": "method",
             "name": "stream",
@@ -1444,7 +1753,34 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 195,
+            "line": 208,
+            "description": "Add local stream to be sent to this remote peer\n\nIf you use this method you have to set `auto_connect` to `false` in the options object and call `connect()` manually on all remote peers.",
+            "itemtype": "method",
+            "name": "addStream",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the stream",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'stream'"
+                },
+                {
+                    "name": "stream",
+                    "description": "The stream, a promise to the stream or the configuration to create a stream with `rtc.Stream.createStream()`",
+                    "type": "Promise -> rtc.Stream | rtc.Stream | Object"
+                }
+            ],
+            "return": {
+                "description": "Promise of the stream which was added",
+                "type": "Promise -> rtc.Stream"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 245,
             "description": "Get a data channel to the remote peer. Has to be added by local and remote side to succeed.",
             "itemtype": "method",
             "name": "channel",
@@ -1461,6 +1797,31 @@
                 "description": "Promise of the data channel",
                 "type": "Promise -> rtc.DataChannel"
             },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 255,
+            "description": "Add data channel which will be negotiated with this remote peer\n\nIf you use this method you have to set `auto_connect` to `false` in the options object and call `connect()` manually on all remote peers.",
+            "itemtype": "method",
+            "name": "addDataChannel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the data channel",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'data'"
+                },
+                {
+                    "name": "desc",
+                    "description": "Options passed to `RTCDataChannel.createDataChannel()`",
+                    "type": "Object",
+                    "optional": true,
+                    "optdefault": "{ordered: true}"
+                }
+            ],
             "class": "rtc.RemotePeer",
             "module": "rtc"
         },

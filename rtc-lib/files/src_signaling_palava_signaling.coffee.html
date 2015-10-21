@@ -103,7 +103,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 {Deferred} = require(&#x27;../internal/promise&#x27;)
-EventEmitter = require(&#x27;events&#x27;).EventEmitter
+{Signaling,SignalingPeer} = require(&#x27;./signaling&#x27;)
 
 
 ###*
@@ -113,8 +113,9 @@ EventEmitter = require(&#x27;events&#x27;).EventEmitter
 ###*
 # Signaling peer compatible with the framing of palava signaling
 # @class rtc.signaling.PalavaSignalingPeer
+# @extends rtc.signaling.SignalingPeer
 ###
-class exports.PalavaSignalingPeer extends EventEmitter
+class exports.PalavaSignalingPeer extends SignalingPeer
 
   constructor: (@channel, @id, @status, @first) -&gt;
     recv_msg = (data) =&gt;
@@ -131,7 +132,7 @@ class exports.PalavaSignalingPeer extends EventEmitter
     @channel.on(&#x27;message&#x27;, recv_msg)
 
     @on &#x27;peer_updated_status&#x27;, (status) =&gt;
-      @emit(&#x27;new_status&#x27;, status)
+      @emit(&#x27;status_changed&#x27;, status)
 
     @on &#x27;peer_left&#x27;, () =&gt;
       @emit(&#x27;closed&#x27;)
@@ -151,8 +152,9 @@ class exports.PalavaSignalingPeer extends EventEmitter
 ###*
 # Signaling implementation compatible with the framing of palava signaling
 # @class rtc.signaling.PalavaSignaling
+# @extends rtc.signaling.Signaling
 ###
-class exports.PalavaSignaling extends EventEmitter
+class exports.PalavaSignaling extends Signaling
 
   constructor: (@channel, @room, @status) -&gt;
     @peers = {}
