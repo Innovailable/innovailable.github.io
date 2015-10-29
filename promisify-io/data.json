@@ -1,0 +1,358 @@
+{
+    "project": {},
+    "files": {
+        "src/lines.coffee": {
+            "name": "src/lines.coffee",
+            "modules": {},
+            "classes": {
+                "PromiseLines": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/promisify.coffee": {
+            "name": "src/promisify.coffee",
+            "modules": {},
+            "classes": {
+                "Promisify": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/socket.coffee": {
+            "name": "src/socket.coffee",
+            "modules": {},
+            "classes": {
+                "PromiseSocket": 1,
+                "PromiseSocketClient": 1,
+                "PromiseSocketServer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "PromiseLines": {
+            "name": "PromiseLines",
+            "shortname": "PromiseLines",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/lines.coffee",
+            "line": 3,
+            "description": "A virtual device turning providing a line based interface for other devices.\n\nThe underlying device is expected to read and write `Buffer` objects. This\ndevice reads and writes `String`s.",
+            "extends": "Promisify",
+            "example": [
+                "\n    var socket = new pio.PromiseSocketClient(\"localhost\", 4321)\n    var lines = new pio.PromiseLines(socket)\n\n    lines.sendRecv(\"hello\").then(function(data) {\n      console.log(data);\n    });"
+            ],
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "io",
+                    "description": "The underlying device",
+                    "type": "Promisify"
+                },
+                {
+                    "name": "delimiter",
+                    "description": "The string which splits the messages",
+                    "type": "String"
+                },
+                {
+                    "name": "encoding",
+                    "description": "Encoding to use",
+                    "type": "String"
+                }
+            ]
+        },
+        "Promisify": {
+            "name": "Promisify",
+            "shortname": "Promisify",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/promisify.coffee",
+            "line": 4,
+            "description": "Base class for promise based IO devices.\n\nThe type of the data which is sent and received is implementation specific.\nYou will most probably use `Buffer` or `String`.\n\nImplementation of actual devices have to use and overwrite the protected\nmethods which start with an underscore."
+        },
+        "PromiseSocket": {
+            "name": "PromiseSocket",
+            "shortname": "PromiseSocket",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/socket.coffee",
+            "line": 6,
+            "description": "A promise wrapper around network sockets. It receives `Buffer` and can send\n`Buffer` and `String`.\n\nIf you want to connect to a server use `PromiseSocketClient` and if you want\nto create a server use `PromiseSocketServer`.",
+            "extends": "Promisify",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "socket",
+                    "description": "The underlying socket",
+                    "type": "net.Socket"
+                }
+            ]
+        },
+        "PromiseSocketClient": {
+            "name": "PromiseSocketClient",
+            "shortname": "PromiseSocketClient",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/socket.coffee",
+            "line": 61,
+            "description": "A promise wrapper around an outgoing TCP connection.",
+            "extends": "PromiseSocket",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "address",
+                    "description": "The host to connect to",
+                    "type": "String"
+                },
+                {
+                    "name": "port",
+                    "description": "The port to connect to",
+                    "type": "Integer"
+                }
+            ]
+        },
+        "PromiseSocketServer": {
+            "name": "PromiseSocketServer",
+            "shortname": "PromiseSocketServer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/socket.coffee",
+            "line": 92,
+            "description": "A promise base TCP server",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "port",
+                    "description": "The port to bind to",
+                    "type": "Integer"
+                },
+                {
+                    "name": "host",
+                    "description": "The host to bind to",
+                    "type": "String"
+                }
+            ]
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src/promisify.coffee",
+            "line": 22,
+            "description": "Receive data from the device",
+            "itemtype": "method",
+            "name": "recv",
+            "return": {
+                "description": "The data which was read",
+                "type": "Promise"
+            },
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 36,
+            "description": "Sends and receives data",
+            "itemtype": "method",
+            "name": "sendRecv",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data to be sent"
+                }
+            ],
+            "return": {
+                "description": "The data which is read",
+                "type": "Promise"
+            },
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 47,
+            "description": "Sends data on the device",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data to be sent"
+                }
+            ],
+            "return": {
+                "description": "Promise which will be resolved once the data was sent",
+                "type": "Promise"
+            },
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 58,
+            "description": "Close the device",
+            "itemtype": "method",
+            "name": "close",
+            "return": {
+                "description": "Promise which will be resolved once the device is closed",
+                "type": "Promise"
+            },
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 67,
+            "description": "Open the connection with the undelying device",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "Promise which will be resolved once the device is open",
+                "type": "Promise"
+            },
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 79,
+            "description": "Method to be called by implementation when data is received",
+            "itemtype": "method",
+            "name": "_receiving",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The date which was received"
+                }
+            ],
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 92,
+            "description": "Method to be called by implementation when the device is closing",
+            "itemtype": "method",
+            "name": "_closed",
+            "access": "protected",
+            "tagname": "",
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 102,
+            "description": "Method containing the custom implementation to connect to the device. Actual devices have to overwrite this!",
+            "itemtype": "method",
+            "name": "_connect",
+            "return": {
+                "description": "Promise which will be resolved when the device is connected. When there is no way to check just return `Promise.resolve()`",
+                "type": "Promise"
+            },
+            "access": "protected",
+            "tagname": "",
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 112,
+            "description": "Method containing the custom implementation to send data. Actual devices have to overwrite this!",
+            "itemtype": "method",
+            "name": "_send",
+            "return": {
+                "description": "Promise which will be resolved when the data is sent. When there is no way to check just return `Promise.resolve()`",
+                "type": "Promise"
+            },
+            "access": "protected",
+            "tagname": "",
+            "class": "Promisify"
+        },
+        {
+            "file": "src/promisify.coffee",
+            "line": 122,
+            "description": "Method containing the custom implementation to close the device. Actual devices have to overwrite this!",
+            "itemtype": "method",
+            "name": "_close",
+            "return": {
+                "description": "Promise which will be resolved when the device is closed. When there is no way to check just return `Promise.resolve()`",
+                "type": "Promise"
+            },
+            "access": "protected",
+            "tagname": "",
+            "class": "Promisify"
+        },
+        {
+            "file": "src/socket.coffee",
+            "line": 109,
+            "description": "Start listening for incoming sockets",
+            "itemtype": "method",
+            "name": "listen",
+            "return": {
+                "description": "Promise which will be resolved once the server listens",
+                "type": "Promise"
+            },
+            "class": "PromiseSocketServer"
+        },
+        {
+            "file": "src/socket.coffee",
+            "line": 138,
+            "description": "Get the next which connects to the server",
+            "itemtype": "method",
+            "name": "nextSocket",
+            "return": {
+                "description": "Promise of the next socket",
+                "type": "Promise"
+            },
+            "class": "PromiseSocketServer"
+        },
+        {
+            "file": "src/socket.coffee",
+            "line": 151,
+            "description": "Close the server",
+            "itemtype": "method",
+            "name": "close",
+            "class": "PromiseSocketServer"
+        },
+        {
+            "file": "src/socket.coffee",
+            "line": 163,
+            "description": "Check whether there are pending incoming connections",
+            "return": {
+                "description": "`true` if there are no incoming sockets in the queue",
+                "type": "Boolean"
+            },
+            "class": "PromiseSocketServer"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " src/lines.coffee:3"
+        },
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " src/socket.coffee:6"
+        },
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " src/socket.coffee:61"
+        },
+        {
+            "message": "Missing item type\nCheck whether there are pending incoming connections",
+            "line": " src/socket.coffee:163"
+        }
+    ]
+}

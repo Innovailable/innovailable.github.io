@@ -4,3 +4,6 @@
 [submodule "source/rtc-lib"]
 	path = source/rtc-lib
 	url = https://github.com/Innovailable/rtc-lib.git
+[submodule "source/promisify-io"]
+	path = source/promisify-io
+	url = git@github.com:Innovailable/promisify-io.git

@@ -1,4 +1,4 @@
-all: rtc-lib easy-signaling
+all: rtc-lib easy-signaling promisify-io
 
 pull:
 	for i in source/*; do cd $$i; git pull origin master; cd ../..; done
@@ -14,6 +14,12 @@ easy-signaling:
 	rm -rf $@ && mkdir -p $@
 	make -C source/easy-signaling doc
 	cp -a source/easy-signaling/doc/* $@
+	git add -A $@
+
+promisify-io:
+	rm -rf $@ && mkdir -p $@
+	make -C source/$@ doc
+	cp -a source/$@/doc/* $@
 	git add -A $@
 
 .PHONY: rtc-lib easy-signaling
