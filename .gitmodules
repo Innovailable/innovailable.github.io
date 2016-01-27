@@ -7,3 +7,6 @@
 [submodule "source/promisify-io"]
 	path = source/promisify-io
 	url = https://github.com/Innovailable/promisify-io.git
+[submodule "source/rtc-bomber"]
+	path = source/rtc-bomber
+	url = git@github.com:Innovailable/rtc-bomber.git

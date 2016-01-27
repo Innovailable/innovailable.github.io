@@ -156,7 +156,7 @@
     "classitems": [
         {
             "file": "src/promisify.coffee",
-            "line": 22,
+            "line": 25,
             "description": "Receive data from the device",
             "itemtype": "method",
             "name": "recv",
@@ -168,7 +168,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 36,
+            "line": 39,
             "description": "Sends and receives data",
             "itemtype": "method",
             "name": "sendRecv",
@@ -186,7 +186,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 47,
+            "line": 50,
             "description": "Sends data on the device",
             "itemtype": "method",
             "name": "send",
@@ -204,7 +204,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 58,
+            "line": 61,
             "description": "Close the device",
             "itemtype": "method",
             "name": "close",
@@ -216,7 +216,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 67,
+            "line": 70,
             "description": "Open the connection with the undelying device",
             "itemtype": "method",
             "name": "connect",
@@ -228,7 +228,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 79,
+            "line": 86,
             "description": "Method to be called by implementation when data is received",
             "itemtype": "method",
             "name": "_receiving",
@@ -244,7 +244,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 92,
+            "line": 99,
             "description": "Method to be called by implementation when the device is closing",
             "itemtype": "method",
             "name": "_closed",
@@ -254,7 +254,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 102,
+            "line": 111,
             "description": "Method containing the custom implementation to connect to the device. Actual devices have to overwrite this!",
             "itemtype": "method",
             "name": "_connect",
@@ -268,7 +268,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 112,
+            "line": 121,
             "description": "Method containing the custom implementation to send data. Actual devices have to overwrite this!",
             "itemtype": "method",
             "name": "_send",
@@ -282,7 +282,7 @@
         },
         {
             "file": "src/promisify.coffee",
-            "line": 122,
+            "line": 131,
             "description": "Method containing the custom implementation to close the device. Actual devices have to overwrite this!",
             "itemtype": "method",
             "name": "_close",

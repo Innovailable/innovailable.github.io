@@ -324,8 +324,8 @@
             "module": "rtc.signaling",
             "namespace": "",
             "file": "src/signaling/muc_signaling.coffee",
-            "line": 63,
-            "description": "Signaling for multi user chats\n\nThe following messages are sent to the server:\n\n    // join the room. has to be sent before any other message.\n    // response will be 'joined' on success\n    // other peers in the room will get 'peer_joined'\n    {\n      \"type\": \"join\",\n      \"status\": { .. status .. }\n    }\n\n    // leave the room. server will close the connectino.\n    {\n      \"type\": \"leave\"\n    }\n\n    // update status object\n    // other peers will get 'peer_status'\n    {\n      \"type\": \"status\",\n      \"status\": { .. status .. }\n    }\n\n    // send message to a peer. will be received as 'to'\n    {\n      \"type\": \"to\",\n      \"peer\": \"peer_id\",\n      \"event\": \"event_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe following messages are received form the server:\n\n    // joined the room. is the response to 'join'\n    {\n      \"type\": \"joined\",\n      \"peers\": {\n        \"peer_id\": { .. status .. }\n      }\n    }\n\n    // another peer joined the room.\n    {\n      \"type\": \"peer_joined\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // anosther peer updated its status object using 'status'\n    {\n      \"type\": \"peer_status\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // another peer left the room\n    {\n      \"type\": \"peer_left\",\n      \"peer\": \"peer_id\"\n    }\n\n    // message from another peer sent by 'to'\n    {\n      \"type\": \"from\",\n      \"peer\": \"peer_id\",\n      \"event\": \"event_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe messages transmitted in the `to`/`from` messages are emitted as events in `MucSignalingPeer`",
+            "line": 69,
+            "description": "Signaling for multi user chats\n\nThe following messages are sent to the server:\n\n    // join the room. has to be sent before any other message.\n    // response will be 'joined' on success\n    // other peers in the room will get 'peer_joined'\n    {\n      \"type\": \"join\",\n      \"status\": { .. status .. }\n    }\n\n    // leave the room. server will close the connectino.\n    {\n      \"type\": \"leave\"\n    }\n\n    // update status object\n    // other peers will get 'peer_status'\n    {\n      \"type\": \"status\",\n      \"status\": { .. status .. }\n    }\n\n    // send message to a peer. will be received as 'from'\n    {\n      \"type\": \"to\",\n      \"peer\": \"peer_id\",\n      \"event\": \"event_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe following messages are received form the server:\n\n    // joined the room. is the response to 'join'\n    {\n      \"type\": \"joined\",\n      \"id\": \"own_id\",\n      \"peers\": {\n        \"peer_id\": { .. status .. }\n      }\n    }\n\n    // another peer joined the room.\n    {\n      \"type\": \"peer_joined\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // anosther peer updated its status object using 'status'\n    {\n      \"type\": \"peer_status\",\n      \"peer\": \"peer_id\",\n      \"status\": { .. status .. }\n    }\n\n    // another peer left the room\n    {\n      \"type\": \"peer_left\",\n      \"peer\": \"peer_id\"\n    }\n\n    // message from another peer sent by 'to'\n    {\n      \"type\": \"from\",\n      \"peer\": \"peer_id\",\n      \"event\": \"event_id\",\n      \"data\": { .. custom data .. }\n    }\n\nThe messages transmitted in the `to`/`from` messages are emitted as events in `MucSignalingPeer`",
             "extends": "rtc.signaling.Signaling",
             "is_constructor": 1,
             "params": [
@@ -790,6 +790,29 @@
             "module": "rtc.internal"
         },
         {
+            "file": "src/internal/promise.coffee",
+            "line": 53,
+            "description": "Adds a timeout to a promise. The promise will be rejected if timeout is\nreached. It will act like the underlying promise if it is resolved or\nrejected before the timeout is reached.",
+            "params": [
+                {
+                    "name": "promise",
+                    "description": "The underlying promise",
+                    "type": "Promse"
+                },
+                {
+                    "name": "time",
+                    "description": "Timeout in ms",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Promise acting like the underlying promise or timeout",
+                "type": "Promise"
+            },
+            "class": "rtc.internal.Deferred",
+            "module": "rtc.internal"
+        },
+        {
             "file": "src/internal/stream_collection.coffee",
             "line": 15,
             "description": "A new stream was added to the collection",
@@ -854,7 +877,7 @@
         },
         {
             "file": "src/internal/stream_collection.coffee",
-            "line": 122,
+            "line": 130,
             "description": "Gets a promise for a stream with the given name. Might be rejected after `update()`",
             "itemtype": "method",
             "name": "get",
@@ -871,6 +894,26 @@
             },
             "class": "rtc.internal.StreamCollection",
             "module": "rtc.internal"
+        },
+        {
+            "file": "src/signaling/muc_signaling.coffee",
+            "line": 25,
+            "description": "The id of the remote peer",
+            "itemtype": "property",
+            "name": "id",
+            "type": "String",
+            "class": "rtc.signaling.MucSignalingPeer",
+            "module": "rtc.signaling"
+        },
+        {
+            "file": "src/signaling/muc_signaling.coffee",
+            "line": 151,
+            "description": "The id of the local peer. Only available after joining.",
+            "itemtype": "property",
+            "name": "id",
+            "type": "String",
+            "class": "rtc.signaling.MucSignaling",
+            "module": "rtc.signaling"
         },
         {
             "file": "src/signaling/signaling.coffee",
@@ -1134,7 +1177,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 68,
+            "line": 73,
             "description": "The label of the DataChannel used to distinguish multiple channels",
             "itemtype": "method",
             "name": "label",
@@ -1147,7 +1190,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 77,
+            "line": 82,
             "description": "Send data to the peer through the DataChannel",
             "itemtype": "method",
             "name": "send",
@@ -1166,7 +1209,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 97,
+            "line": 102,
             "description": "Method which actually sends the data. Implements buffering",
             "itemtype": "method",
             "name": "_actualSend",
@@ -1309,6 +1352,19 @@
             "module": "rtc"
         },
         {
+            "file": "src/local_peer.coffee",
+            "line": 119,
+            "description": "Checks whether the peer is the local peer. Returns always `true` on this\nclass.",
+            "itemtype": "method",
+            "name": "isLocal",
+            "return": {
+                "description": "Returns `true`",
+                "type": "Boolean"
+            },
+            "class": "rtc.LocalPeer",
+            "module": "rtc"
+        },
+        {
             "file": "src/peer.coffee",
             "line": 12,
             "description": "The status of the peer has changed",
@@ -1418,7 +1474,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 104,
+            "line": 107,
             "description": "Add new signaling information received from remote peer",
             "itemtype": "method",
             "name": "signaling",
@@ -1434,7 +1490,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 119,
+            "line": 122,
             "description": "Add a remote ICE candidate",
             "itemtype": "method",
             "name": "addIceCandidate",
@@ -1450,7 +1506,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 133,
+            "line": 136,
             "description": "Returns the options for the offer/answer",
             "itemtype": "method",
             "name": "_oaOptions",
@@ -1465,7 +1521,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 149,
+            "line": 152,
             "description": "Set the remote description",
             "itemtype": "method",
             "name": "_setRemoteDescription",
@@ -1487,7 +1543,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 162,
+            "line": 165,
             "description": "Create offer, set it on local description and emit it",
             "itemtype": "method",
             "name": "_offer",
@@ -1498,7 +1554,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 176,
+            "line": 179,
             "description": "Create answer, set it on local description and emit it",
             "itemtype": "method",
             "name": "_offer",
@@ -1509,7 +1565,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 190,
+            "line": 193,
             "description": "Set local description and emit it",
             "itemtype": "method",
             "name": "_processLocalSdp",
@@ -1531,7 +1587,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 211,
+            "line": 214,
             "description": "Mark connection attempt as failed",
             "itemtype": "method",
             "name": "_connectError",
@@ -1549,7 +1605,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 224,
+            "line": 227,
             "description": "Add local stream",
             "itemtype": "method",
             "name": "addStream",
@@ -1565,7 +1621,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 233,
+            "line": 236,
             "description": "Remove local stream",
             "itemtype": "method",
             "name": "removeStream",
@@ -1581,7 +1637,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 242,
+            "line": 245,
             "description": "Add DataChannel. Will only actually do something if `offering` is `true`.",
             "itemtype": "method",
             "name": "addDataChannel",
@@ -1602,7 +1658,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 256,
+            "line": 265,
             "description": "Establish connection with remote peer. Connection will be established once both peers have called this functio",
             "itemtype": "method",
             "name": "connect",
@@ -1615,7 +1671,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 275,
+            "line": 284,
             "description": "Close the connection to the remote peer",
             "itemtype": "method",
             "name": "close",
@@ -1690,7 +1746,17 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 139,
+            "line": 59,
+            "description": "The connection to the peer supplied by the signaling implementation",
+            "itemtype": "property",
+            "name": "signaling",
+            "type": "rtc.signaling.SignalingPeer",
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
+            "file": "src/remote_peer.coffee",
+            "line": 145,
             "description": "Send a message to the peer through signaling",
             "itemtype": "method",
             "name": "message",
@@ -1709,7 +1775,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 149,
+            "line": 155,
             "description": "Connect to the remote peer to exchange streams and create data channels",
             "itemtype": "method",
             "name": "connect",
@@ -1722,7 +1788,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 189,
+            "line": 195,
             "description": "Closes the connection to the peer",
             "itemtype": "method",
             "name": "close",
@@ -1731,7 +1797,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 198,
+            "line": 204,
             "description": "Get a stream from the peer. Has to be sent by the remote peer to succeed.",
             "itemtype": "method",
             "name": "stream",
@@ -1753,7 +1819,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 208,
+            "line": 214,
             "description": "Add local stream to be sent to this remote peer\n\nIf you use this method you have to set `auto_connect` to `false` in the options object and call `connect()` manually on all remote peers.",
             "itemtype": "method",
             "name": "addStream",
@@ -1780,7 +1846,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 245,
+            "line": 251,
             "description": "Get a data channel to the remote peer. Has to be added by local and remote side to succeed.",
             "itemtype": "method",
             "name": "channel",
@@ -1802,7 +1868,7 @@
         },
         {
             "file": "src/remote_peer.coffee",
-            "line": 255,
+            "line": 261,
             "description": "Add data channel which will be negotiated with this remote peer\n\nIf you use this method you have to set `auto_connect` to `false` in the options object and call `connect()` manually on all remote peers.",
             "itemtype": "method",
             "name": "addDataChannel",
@@ -1826,6 +1892,19 @@
             "module": "rtc"
         },
         {
+            "file": "src/remote_peer.coffee",
+            "line": 289,
+            "description": "Checks whether the peer is the local peer. Returns always `false` on this\nclass.",
+            "itemtype": "method",
+            "name": "isLocal",
+            "return": {
+                "description": "Returns `false`",
+                "type": "Boolean"
+            },
+            "class": "rtc.RemotePeer",
+            "module": "rtc"
+        },
+        {
             "file": "src/room.coffee",
             "line": 27,
             "description": "A new peer is encountered in the room. Fires on new remote peers after joining and for all peers in the room when joining.",
@@ -1844,6 +1923,43 @@
         {
             "file": "src/room.coffee",
             "line": 33,
+            "description": "A peer left the room.",
+            "itemtype": "event",
+            "name": "peer_left",
+            "params": [
+                {
+                    "name": "peer",
+                    "description": "The peer which left",
+                    "type": "rtc.RemotePeer"
+                }
+            ],
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 39,
+            "description": "A peer changed its status.",
+            "itemtype": "event",
+            "name": "peer_status_changed",
+            "params": [
+                {
+                    "name": "peer",
+                    "description": "The peer which changed its status",
+                    "type": "rtc.RemotePeer"
+                },
+                {
+                    "name": "status",
+                    "description": "The new status",
+                    "type": "Object"
+                }
+            ],
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 46,
             "description": "The connection to the room was closed",
             "itemtype": "event",
             "name": "closed",
@@ -1852,7 +1968,27 @@
         },
         {
             "file": "src/room.coffee",
-            "line": 59,
+            "line": 51,
+            "description": "The underlying signaling implementation as provided in constructor",
+            "itemtype": "property",
+            "name": "signaling",
+            "type": "rtc.signaling.Signaling",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 57,
+            "description": "The local peer",
+            "itemtype": "property",
+            "name": "local",
+            "type": "rtc.LocalPeer",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 96,
             "description": "Joins the room. Initiates connection to signaling server if not done before.",
             "itemtype": "method",
             "name": "join",
@@ -1865,7 +2001,7 @@
         },
         {
             "file": "src/room.coffee",
-            "line": 71,
+            "line": 108,
             "description": "Leaves the room and closes all established peer connections",
             "itemtype": "method",
             "name": "leave",
@@ -1874,10 +2010,33 @@
         },
         {
             "file": "src/room.coffee",
-            "line": 79,
+            "line": 116,
             "description": "Cleans up all resources used by the room.",
             "itemtype": "method",
             "name": "leave",
+            "class": "rtc.Room",
+            "module": "rtc"
+        },
+        {
+            "file": "src/room.coffee",
+            "line": 125,
+            "description": "Creates a remote peer. Overwrite to use your own class for peers.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "create_peer",
+            "params": [
+                {
+                    "name": "pc",
+                    "description": "The PeerConnection to the peer",
+                    "type": "rtc.PeerConnection"
+                },
+                {
+                    "name": "signaling_peer",
+                    "description": "The signaling connection to the peer",
+                    "type": "rtc.SignalingPeer"
+                }
+            ],
             "class": "rtc.Room",
             "module": "rtc"
         },
@@ -2000,7 +2159,7 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 101,
+            "line": 105,
             "description": "Creates a stream using `getUserMedia()`",
             "itemtype": "method",
             "name": "createStream",
@@ -2025,5 +2184,10 @@
             "module": "rtc"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nAdds a timeout to a promise. The promise will be rejected if timeout is\nreached. It will act like the underlying promise if it is resolved or\nrejected before the timeout is reached.",
+            "line": " src/internal/promise.coffee:53"
+        }
+    ]
 }

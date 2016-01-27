@@ -223,6 +223,7 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
@@ -255,6 +256,10 @@
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_isLocal">isLocal</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_message">message</a>
 
                             </li>
@@ -269,6 +274,16 @@
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_signaling">signaling</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
                 <div class="index-section events">
@@ -326,7 +341,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l255"><code>src&#x2F;remote_peer.coffee:255</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l261"><code>src&#x2F;remote_peer.coffee:261</code></a>
         </p>
 
 
@@ -400,7 +415,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l208"><code>src&#x2F;remote_peer.coffee:208</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l214"><code>src&#x2F;remote_peer.coffee:214</code></a>
         </p>
 
 
@@ -479,7 +494,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l245"><code>src&#x2F;remote_peer.coffee:245</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l251"><code>src&#x2F;remote_peer.coffee:251</code></a>
         </p>
 
 
@@ -537,7 +552,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l189"><code>src&#x2F;remote_peer.coffee:189</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l195"><code>src&#x2F;remote_peer.coffee:195</code></a>
         </p>
 
 
@@ -571,7 +586,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l149"><code>src&#x2F;remote_peer.coffee:149</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l155"><code>src&#x2F;remote_peer.coffee:155</code></a>
         </p>
 
 
@@ -590,6 +605,50 @@
             <div class="returns-description">
                         <span class="type">Promise</span>:
                     <p>Promise which will resolved when the connection is established</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_isLocal" class="method item">
+    <h3 class="name"><code>isLocal</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_remote_peer.coffee.html#l289"><code>src&#x2F;remote_peer.coffee:289</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Checks whether the peer is the local peer. Returns always <code>false</code> on this
+class.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>Returns <code>false</code></p>
 
             </div>
         </div>
@@ -620,7 +679,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l139"><code>src&#x2F;remote_peer.coffee:139</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l145"><code>src&#x2F;remote_peer.coffee:145</code></a>
         </p>
 
 
@@ -751,7 +810,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_remote_peer.coffee.html#l198"><code>src&#x2F;remote_peer.coffee:198</code></a>
+        <a href="../files/src_remote_peer.coffee.html#l204"><code>src&#x2F;remote_peer.coffee:204</code></a>
         </p>
 
 
@@ -796,6 +855,35 @@
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_signaling" class="property item">
+    <h3 class="name"><code>signaling</code></h3>
+    <span class="type"><a href="../classes/rtc.signaling.SignalingPeer.html" class="crosslink">rtc.signaling.SignalingPeer</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_remote_peer.coffee.html#l59"><code>src&#x2F;remote_peer.coffee:59</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>The connection to the peer supplied by the signaling implementation</p>
+
+    </div>
+
+
+
+</div>
+            </div>
 
 
             <div id="events" class="api-class-tabpanel">

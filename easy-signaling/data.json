@@ -541,7 +541,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 307,
+            "line": 306,
             "description": "The guest receives data",
             "itemtype": "method",
             "name": "receive",
@@ -559,7 +559,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 381,
+            "line": 397,
             "description": "The guest sends data",
             "itemtype": "method",
             "name": "send",
@@ -577,7 +577,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 391,
+            "line": 407,
             "description": "The guest encountered an error",
             "itemtype": "method",
             "name": "error",
@@ -595,7 +595,7 @@
         },
         {
             "file": "src/signaling.coffee",
-            "line": 408,
+            "line": 424,
             "description": "The connection to the guest is closing",
             "itemtype": "method",
             "name": "closing",

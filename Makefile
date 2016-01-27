@@ -1,4 +1,4 @@
-all: rtc-lib easy-signaling promisify-io
+all: rtc-lib easy-signaling promisify-io rtc-bomber
 
 pull:
 	for i in source/*; do cd $$i; git pull origin master; cd ../..; done
@@ -22,4 +22,10 @@ promisify-io:
 	cp -a source/$@/doc/* $@
 	git add -A $@
 
-.PHONY: rtc-lib easy-signaling
+rtc-bomber:
+	rm -rf $@ && mkdir -p $@
+	SIGNALING_URL=wss://calling.innovailable.eu make -C source/$@
+	cp -a source/$@/out/* $@
+	git add -A $@
+
+.PHONY: rtc-lib easy-signaling rtc-bomber promisify-io

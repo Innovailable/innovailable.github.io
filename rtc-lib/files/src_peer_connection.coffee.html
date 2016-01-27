@@ -160,6 +160,7 @@ class exports.PeerConnection extends EventEmitter
 
   constructor: (@offering, @options) -&gt;
     ice_servers = []
+    @no_gc_bugfix = []
 
     if @options.stun?
       ice_servers.push({url: @options.stun})
@@ -170,6 +171,8 @@ class exports.PeerConnection extends EventEmitter
 
     @connect_d = new Deferred()
     @connected = false
+
+    @connect_d.promise.catch(() -&gt;)
 
     @signaling_pending = []
 
@@ -226,7 +229,7 @@ class exports.PeerConnection extends EventEmitter
   # @param {Object} desc The candidate
   ###
   addIceCandidate: (desc) -&gt;
-    if desc.candidate?
+    if desc?.candidate?
       candidate = new compat.IceCandidate(desc)
       @pc.addIceCandidate(candidate)
     else
@@ -259,7 +262,7 @@ class exports.PeerConnection extends EventEmitter
   ###
   _setRemoteDescription: (sdp) -&gt;
     return new Promise (resolve, reject) =&gt;
-      description = new rtc.compat.SessionDescription(sdp)
+      description = new compat.SessionDescription(sdp)
       @pc.setRemoteDescription(sdp, resolve, reject)
 
 
@@ -353,6 +356,12 @@ class exports.PeerConnection extends EventEmitter
     if @offering
       channel = @pc.createDataChannel(name, options)
 
+      # Don&#x27;t let the channel be garbage collected
+      # We only pass it on in onopen callback so the gc is not clever enough to let this live ...
+      # https://code.google.com/p/chromium/issues/detail?id=405545
+      # https://bugzilla.mozilla.org/show_bug.cgi?id=964092
+      @no_gc_bugfix.push(channel)
+
       channel.onopen = () =&gt;
         @emit(&#x27;data_channel_ready&#x27;, new DataChannel(channel))
 
@@ -373,7 +382,7 @@ class exports.PeerConnection extends EventEmitter
 
       @connected = true
 
-    return @connect_d.promise
+    return Promise.resolve(@connect_d.promise)
 
 
   ###*

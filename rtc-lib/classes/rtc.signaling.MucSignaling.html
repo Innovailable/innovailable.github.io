@@ -106,7 +106,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_signaling_muc_signaling.coffee.html#l63"><code>src&#x2F;signaling&#x2F;muc_signaling.coffee:63</code></a>
+            Defined in: <a href="../files/src_signaling_muc_signaling.coffee.html#l69"><code>src&#x2F;signaling&#x2F;muc_signaling.coffee:69</code></a>
         </div>
 
             Module: <a href="../modules/rtc.signaling.html">rtc.signaling</a>
@@ -137,7 +137,7 @@
   &quot;status&quot;: { .. status .. }
 }
 
-// send message to a peer. will be received as 'to'
+// send message to a peer. will be received as 'from'
 {
   &quot;type&quot;: &quot;to&quot;,
   &quot;peer&quot;: &quot;peer_id&quot;,
@@ -149,6 +149,7 @@
 <pre class="code prettyprint"><code>// joined the room. is the response to 'join'
 {
   &quot;type&quot;: &quot;joined&quot;,
+  &quot;id&quot;: &quot;own_id&quot;,
   &quot;peers&quot;: {
     &quot;peer_id&quot;: { .. status .. }
   }
@@ -209,7 +210,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_signaling_muc_signaling.coffee.html#l63"><code>src&#x2F;signaling&#x2F;muc_signaling.coffee:63</code></a>
+        <a href="../files/src_signaling_muc_signaling.coffee.html#l69"><code>src&#x2F;signaling&#x2F;muc_signaling.coffee:69</code></a>
         </p>
 
 
@@ -248,6 +249,7 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
@@ -274,6 +276,16 @@
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_id">id</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
                 <div class="index-section events">
@@ -420,6 +432,35 @@
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_id" class="property item">
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_signaling_muc_signaling.coffee.html#l151"><code>src&#x2F;signaling&#x2F;muc_signaling.coffee:151</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>The id of the local peer. Only available after joining.</p>
+
+    </div>
+
+
+
+</div>
+            </div>
 
 
             <div id="events" class="api-class-tabpanel">

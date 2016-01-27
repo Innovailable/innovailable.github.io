@@ -104,12 +104,12 @@
     <pre class="code prettyprint linenums">
 EventEmitter = require(&#x27;events&#x27;).EventEmitter
 
-{WebSocketChannel} = require(&#x27;./signaling/web_socket_channel.coffee&#x27;)
-{MucSignaling} = require(&#x27;./signaling/muc_signaling.coffee&#x27;)
+{WebSocketChannel} = require(&#x27;./signaling/web_socket_channel&#x27;)
+{MucSignaling} = require(&#x27;./signaling/muc_signaling&#x27;)
 
-RemotePeer = require(&#x27;./remote_peer.coffee&#x27;).RemotePeer
-LocalPeer = require(&#x27;./local_peer.coffee&#x27;).LocalPeer
-PeerConnection = require(&#x27;./peer_connection.coffee&#x27;).PeerConnection
+RemotePeer = require(&#x27;./remote_peer&#x27;).RemotePeer
+LocalPeer = require(&#x27;./local_peer&#x27;).LocalPeer
+PeerConnection = require(&#x27;./peer_connection&#x27;).PeerConnection
 
 ###*
 # @module rtc
@@ -135,8 +135,33 @@ class exports.Room extends EventEmitter
   ###
 
   ###*
+  # A peer left the room.
+  # @event peer_left
+  # @param {rtc.RemotePeer} peer The peer which left
+  ###
+
+  ###*
+  # A peer changed its status.
+  # @event peer_status_changed
+  # @param {rtc.RemotePeer} peer The peer which changed its status
+  # @param {Object} status The new status
+  ###
+
+  ###*
   # The connection to the room was closed
   # @event closed
+  ###
+
+  ###*
+  # The underlying signaling implementation as provided in constructor
+  # @property signaling
+  # @type rtc.signaling.Signaling
+  ###
+
+  ###*
+  # The local peer
+  # @property local
+  # @type rtc.LocalPeer
   ###
 
   constructor: (@signaling, @options={}) -&gt;
@@ -147,9 +172,21 @@ class exports.Room extends EventEmitter
 
     @local = @options.local || new LocalPeer()
 
+    @signaling.setStatus(@local._status)
+
+    @local.on &#x27;status_changed&#x27;, () =&gt;
+      @signaling.setStatus(@local._status)
+
     @signaling.on &#x27;peer_joined&#x27;, (signaling_peer) =&gt;
       pc = new PeerConnection(signaling_peer.first, @options)
-      peer = new RemotePeer(pc, signaling_peer, @local, @options)
+      peer = @createPeer(pc, signaling_peer)
+
+      peer.on &#x27;status_changed&#x27;, (status) =&gt;
+        @emit(&#x27;peer_status_changed&#x27;, peer, status)
+
+      peer.on &#x27;left&#x27;, () =&gt;
+        delete @peers[signaling_peer.id]
+        @emit(&#x27;peer_left&#x27;, peer)
 
       @peers[signaling_peer.id] = peer
       @emit(&#x27;peer_joined&#x27;, peer)
@@ -187,6 +224,17 @@ class exports.Room extends EventEmitter
   destroy: () -&gt;
     # TODO ...
     return @signaling.leave()
+
+
+  ###*
+  # Creates a remote peer. Overwrite to use your own class for peers.
+  # @private
+  # @method create_peer
+  # @param {rtc.PeerConnection} pc The PeerConnection to the peer
+  # @param {rtc.SignalingPeer} signaling_peer The signaling connection to the peer
+  ###
+  createPeer: (pc, signaling_peer) -&gt;
+    return new RemotePeer(pc, signaling_peer, @local, @options)
 
     </pre>
 </div>

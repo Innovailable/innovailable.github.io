@@ -160,6 +160,12 @@ class exports.RemotePeer extends Peer
   # @param {Promise -&gt; rtc.DataChannel} channel Promise of the channel
   ###
 
+  ###*
+  # The connection to the peer supplied by the signaling implementation
+  # @property signaling
+  # @type rtc.signaling.SignalingPeer
+  ###
+
   constructor: (@peer_connection, @signaling, @local, @options) -&gt;
     # create streams
 
@@ -382,6 +388,16 @@ class exports.RemotePeer extends Peer
     @private_channels[name] = desc
 
     return @channel(name)
+
+
+  ###*
+  # Checks whether the peer is the local peer. Returns always &#x60;false&#x60; on this
+  # class.
+  # @method isLocal
+  # @return {Boolean} Returns &#x60;false&#x60;
+  ###
+  isLocal: () -&gt;
+    return false
 
     </pre>
 </div>
