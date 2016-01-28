@@ -49085,8 +49085,8 @@ Game = (function(superClass) {
     spawn = this.spawns.shift();
     player.x = spawn.x;
     player.y = spawn.y;
-    player.bombs = 5;
-    player.splash = 3;
+    player.bombs = 1;
+    player.splash = 1;
     player.color = this.players.length;
     return this.players.push(player);
   };
@@ -49108,8 +49108,8 @@ Game = (function(superClass) {
 
   Game.prototype.spawn_powerup = function(x, y) {
     var type;
-    if (this.rng() < 0.15) {
-      if (this.rng() < 0.5) {
+    if (this.rng() < 0.1) {
+      if (this.rng() < 0.33) {
         type = Game.POWERUP_BOMB;
       } else {
         type = Game.POWERUP_EXPLOSION;
