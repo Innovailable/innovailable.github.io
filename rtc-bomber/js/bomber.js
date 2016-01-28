@@ -49042,6 +49042,10 @@ Game = (function(superClass) {
 
   Game.MOVE_LEFT = 4;
 
+  Game.POWERUP_BOMB = 0;
+
+  Game.POWERUP_EXPLOSION = 1;
+
   function Game(level, seed) {
     var cell, j, k, len, len1, line, ref, x, y;
     this.players = [];
@@ -49081,8 +49085,8 @@ Game = (function(superClass) {
     spawn = this.spawns.shift();
     player.x = spawn.x;
     player.y = spawn.y;
-    player.bombs = 2;
-    player.splash = 2;
+    player.bombs = 5;
+    player.splash = 3;
     player.color = this.players.length;
     return this.players.push(player);
   };
@@ -49102,9 +49106,27 @@ Game = (function(superClass) {
     return false;
   };
 
+  Game.prototype.spawn_powerup = function(x, y) {
+    var type;
+    if (this.rng() < 0.15) {
+      if (this.rng() < 0.5) {
+        type = Game.POWERUP_BOMB;
+      } else {
+        type = Game.POWERUP_EXPLOSION;
+      }
+      this.powerups.push({
+        type: type,
+        x: x,
+        y: y
+      });
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   Game.prototype.tick = function() {
-    var bomb, direction, done, explode, explosion, field_changed, i, index, j, k, l, len, len1, len2, len3, m, match, matches, move, n, o, p, player, q, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, x, x_dir, x_drift, y, y_dir, y_drift;
-    field_changed = false;
+    var bomb, direction, done, explode, explosion, i, index, j, k, l, len, len1, len2, len3, m, match, matches, move, n, o, p, player, q, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, round_x, round_y, x, x_dir, x_drift, y, y_dir, y_drift;
     ref = this.players;
     for (j = 0, len = ref.length; j < len; j++) {
       player = ref[j];
@@ -49175,16 +49197,28 @@ Game = (function(superClass) {
             };
           })(this));
       }
+      round_x = Math.round(player.x);
+      round_y = Math.round(player.y);
+      each(this.powerups, function(powerup, del) {
+        if (powerup.x === round_x && powerup.y === round_y) {
+          switch (powerup.type) {
+            case Game.POWERUP_EXPLOSION:
+              player.splash += 1;
+              break;
+            case Game.POWERUP_BOMB:
+              player.bombs += 1;
+          }
+          return del();
+        }
+      });
       if (player.wantsBomb() && player.bombs > 0) {
-        x = Math.round(player.x);
-        y = Math.round(player.y);
-        if (!this.collision(x, y)) {
+        if (!this.collision(round_x, round_y)) {
           bomb = {
             player: player,
             ticks: BOMB_TICKS,
             splash: player.splash,
-            x: x,
-            y: y
+            x: round_x,
+            y: round_y
           };
           this.bombs.push(bomb);
           player.bombs -= 1;
@@ -49197,6 +49231,16 @@ Game = (function(superClass) {
         if (bomb.ticks <= 0) {
           explode = (function(_this) {
             return function(x, y) {
+              each(_this.bombs, function(bomb, del) {
+                if (bomb.x === x && bomb.y === y) {
+                  return bomb.ticks = Math.min(bomb.ticks, 10);
+                }
+              });
+              each(_this.powerups, function(powerup, del) {
+                if (powerup.x === x && powerup.y === y) {
+                  return del();
+                }
+              });
               return _this.explosions.push({
                 x: x,
                 y: y,
@@ -49217,8 +49261,9 @@ Game = (function(superClass) {
               switch (this.field[y][x]) {
                 case Game.GRID_ROCK:
                   this.field[y][x] = Game.GRID_OPEN;
-                  explode(x, y);
-                  field_changed = true;
+                  if (!this.spawn_powerup(x, y)) {
+                    explode(x, y);
+                  }
                   done = true;
                   break;
                 case Game.GRID_WALL:
@@ -49287,9 +49332,6 @@ Game = (function(superClass) {
           }
         }
       }
-    }
-    if (field_changed) {
-      this.emit('field_changed');
     }
     return this.emit('ticked');
   };
@@ -49473,7 +49515,11 @@ PeerList = React.createClass({
         "key": peer.id
       }, peer.name);
     });
-    return React.createElement("div", null, React.createElement("h2", null, "Other Players"), React.createElement("ul", null, peers));
+    if (peers.length > 0) {
+      return React.createElement("ul", null, peers);
+    } else {
+      return React.createElement("div", null, "No other players, yet");
+    }
   }
 });
 
@@ -49517,9 +49563,9 @@ LobbyScreen = React.createClass({
     return peers;
   },
   render: function() {
-    return React.createElement("div", null, React.createElement("h2", null, "Game"), "Name: ", this.props.game.signaling.status.name, React.createElement(PeerList, {
+    return React.createElement("div", null, React.createElement("h2", null, "Game"), "Name: ", this.props.game.signaling.status.name, React.createElement("h2", null, "Other Players"), React.createElement(PeerList, {
       "peers": this.state.peers
-    }), React.createElement("input", {
+    }), React.createElement("br", null), React.createElement("input", {
       "type": "button",
       "value": "Start",
       "onClick": this.props.start
@@ -50109,13 +50155,17 @@ setPixelated = function(context) {
 };
 
 exports.Render = (function() {
-  var HALF_SCALE, SCALE;
+  var HALF_SCALE, SCALE, THIRD_SCALE;
 
   Render.COLORS = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)'];
+
+  Render.POWERUP_COLORS = ['rgb(255, 0, 0)', 'rgb(0, 0, 0)'];
 
   SCALE = 20;
 
   HALF_SCALE = SCALE * 0.5;
+
+  THIRD_SCALE = SCALE / 3;
 
   function Render(draw, game) {
     this.draw = draw;
@@ -50136,7 +50186,7 @@ exports.Render = (function() {
   };
 
   Render.prototype.render = function() {
-    var bomb, cell, ctx, explosion, i, j, k, l, len, len1, len2, len3, len4, line, m, player, ref, ref1, ref2, ref3, results, x, x_pos, y, y_pos;
+    var bomb, cell, ctx, explosion, i, j, k, l, len, len1, len2, len3, len4, len5, line, m, n, player, powerup, ref, ref1, ref2, ref3, ref4, results, x, x_pos, y, y_pos;
     ctx = this.draw_ctx;
     ctx.clearRect(0, 0, this.draw.width, this.draw.height);
     ref = this.game.field;
@@ -50159,19 +50209,40 @@ exports.Render = (function() {
         ctx.fillRect(x_pos, y_pos, SCALE, SCALE);
       }
     }
-    ctx.fillStyle = 'rgb(0,0,0)';
-    ref1 = this.game.bombs;
+    ref1 = this.game.powerups;
     for (k = 0, len2 = ref1.length; k < len2; k++) {
-      bomb = ref1[k];
+      powerup = ref1[k];
+      x_pos = powerup.x * SCALE;
+      y_pos = powerup.y * SCALE;
+      ctx.fillStyle = '#66ccff';
+      ctx.fillStyle = 'rgb(120, 200, 255)';
+      ctx.beginPath();
+      ctx.moveTo(x_pos, y_pos);
+      ctx.lineTo(x_pos + SCALE, y_pos);
+      ctx.lineTo(x_pos + SCALE, y_pos + SCALE);
+      ctx.lineTo(x_pos, y_pos + SCALE);
+      ctx.fill();
+      ctx.fillStyle = Render.POWERUP_COLORS[powerup.type];
+      ctx.beginPath();
+      ctx.moveTo(x_pos + THIRD_SCALE, y_pos + THIRD_SCALE);
+      ctx.lineTo(x_pos + SCALE - THIRD_SCALE, y_pos + THIRD_SCALE);
+      ctx.lineTo(x_pos + SCALE - THIRD_SCALE, y_pos + SCALE - THIRD_SCALE);
+      ctx.lineTo(x_pos + THIRD_SCALE, y_pos + SCALE - THIRD_SCALE);
+      ctx.fill();
+    }
+    ctx.fillStyle = 'rgb(0,0,0)';
+    ref2 = this.game.bombs;
+    for (l = 0, len3 = ref2.length; l < len3; l++) {
+      bomb = ref2[l];
       x_pos = bomb.x * SCALE + HALF_SCALE;
       y_pos = bomb.y * SCALE + HALF_SCALE;
       ctx.beginPath();
       ctx.arc(x_pos, y_pos, SCALE * 0.4, 0, 2 * Math.PI);
       ctx.fill();
     }
-    ref2 = this.game.players;
-    for (l = 0, len3 = ref2.length; l < len3; l++) {
-      player = ref2[l];
+    ref3 = this.game.players;
+    for (m = 0, len4 = ref3.length; m < len4; m++) {
+      player = ref3[m];
       x_pos = player.x * SCALE;
       y_pos = player.y * SCALE;
       ctx.fillStyle = Render.COLORS[player.color];
@@ -50183,10 +50254,10 @@ exports.Render = (function() {
       ctx.fill();
     }
     ctx.strokeStyle = 'rgb(255,0,0)';
-    ref3 = this.game.explosions;
+    ref4 = this.game.explosions;
     results = [];
-    for (m = 0, len4 = ref3.length; m < len4; m++) {
-      explosion = ref3[m];
+    for (n = 0, len5 = ref4.length; n < len5; n++) {
+      explosion = ref4[n];
       x_pos = explosion.x * SCALE;
       y_pos = explosion.y * SCALE;
       ctx.beginPath();
@@ -50244,27 +50315,36 @@ exports.RtcGame = (function(superClass) {
     this.players = [];
     this.explosions = [];
     this.bombs = [];
+    this.powerups = [];
     for (y = i = 0, ref = this.height - 1; 0 <= ref ? i <= ref : i >= ref; y = 0 <= ref ? ++i : --i) {
       for (x = j = 0, ref1 = this.width - 1; 0 <= ref1 ? j <= ref1 : j >= ref1; x = 0 <= ref1 ? ++j : --j) {
         cur = view[index++];
         this.field[y][x] = cur & 0xf;
         special = (cur & 0xf0) >> 4;
         if (special) {
-          switch (special) {
-            case 0xf:
-              this.bombs.push({
-                x: x,
-                y: y
-              });
-              break;
-            case 0xe:
-              this.explosions.push({
-                x: x,
-                y: y
-              });
-              break;
-            default:
-              console.log('unknown special stuff', special);
+          if (special < 2) {
+            this.powerups.push({
+              x: x,
+              y: y,
+              type: special
+            });
+          } else {
+            switch (special) {
+              case 0xf:
+                this.bombs.push({
+                  x: x,
+                  y: y
+                });
+                break;
+              case 0xe:
+                this.explosions.push({
+                  x: x,
+                  y: y
+                });
+                break;
+              default:
+                console.log('unknown special stuff', special);
+            }
           }
         }
       }
@@ -50385,7 +50465,7 @@ exports.RtcSender = (function() {
   };
 
   RtcSender.prototype.send = function() {
-    var bomb, buf, cell, channel, data_view, explosion, extend_field, i, index, j, k, l, len, len1, len2, len3, len4, len5, line, m, n, player, ref, ref1, ref2, ref3, ref4, results, view;
+    var bomb, buf, cell, channel, data_view, explosion, extend_field, i, index, j, k, l, len, len1, len2, len3, len4, len5, len6, line, m, n, o, player, powerup, ref, ref1, ref2, ref3, ref4, ref5, results, view;
     buf = new ArrayBuffer(2 + this.game.width * this.game.height + 1 + this.game.players.length * 10);
     view = new Uint8Array(buf);
     index = 0;
@@ -50406,20 +50486,25 @@ exports.RtcSender = (function() {
         return view[byte] = (view[byte] & 0xf) | (value << 4);
       };
     })(this);
-    ref1 = this.game.explosions;
+    ref1 = this.game.powerups;
     for (k = 0, len2 = ref1.length; k < len2; k++) {
-      explosion = ref1[k];
+      powerup = ref1[k];
+      extend_field(powerup.x, powerup.y, powerup.type);
+    }
+    ref2 = this.game.explosions;
+    for (l = 0, len3 = ref2.length; l < len3; l++) {
+      explosion = ref2[l];
       extend_field(explosion.x, explosion.y, 0xe);
     }
-    ref2 = this.game.bombs;
-    for (l = 0, len3 = ref2.length; l < len3; l++) {
-      bomb = ref2[l];
+    ref3 = this.game.bombs;
+    for (m = 0, len4 = ref3.length; m < len4; m++) {
+      bomb = ref3[m];
       extend_field(bomb.x, bomb.y, 0xf);
     }
     view[index++] = this.game.players.length;
-    ref3 = this.game.players;
-    for (m = 0, len4 = ref3.length; m < len4; m++) {
-      player = ref3[m];
+    ref4 = this.game.players;
+    for (n = 0, len5 = ref4.length; n < len5; n++) {
+      player = ref4[n];
       data_view = new DataView(buf, index);
       index += 8;
       data_view.setFloat32(0, player.x);
@@ -50427,10 +50512,10 @@ exports.RtcSender = (function() {
       view[index++] = player.direction;
       view[index++] = player.color;
     }
-    ref4 = this.channels;
+    ref5 = this.channels;
     results = [];
-    for (n = 0, len5 = ref4.length; n < len5; n++) {
-      channel = ref4[n];
+    for (o = 0, len6 = ref5.length; o < len6; o++) {
+      channel = ref5[o];
       results.push(channel.send(buf)["catch"](function(err) {
         return console.log('unable to send');
       }));
