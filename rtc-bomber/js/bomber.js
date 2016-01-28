@@ -49108,7 +49108,7 @@ Game = (function(superClass) {
 
   Game.prototype.spawn_powerup = function(x, y) {
     var type;
-    if (this.rng() < 0.1) {
+    if (this.rng() < 0.15) {
       if (this.rng() < 0.33) {
         type = Game.POWERUP_BOMB;
       } else {
@@ -50159,7 +50159,7 @@ exports.Render = (function() {
 
   Render.COLORS = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)'];
 
-  Render.POWERUP_COLORS = ['rgb(255, 0, 0)', 'rgb(0, 0, 0)'];
+  Render.POWERUP_COLORS = ['rgb(0, 0, 0)', 'rgb(255, 0, 0)'];
 
   SCALE = 20;
 

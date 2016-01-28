@@ -24,7 +24,7 @@ promisify-io:
 
 rtc-bomber:
 	rm -rf $@ && mkdir -p $@
-	SIGNALING_URL=wss://calling.innovailable.eu make -C source/$@
+	SIGNALING_URL=wss://calling.innovailable.eu GITHUB=1 make -C source/$@
 	cp -a source/$@/out/* $@
 	git add -A $@
 
