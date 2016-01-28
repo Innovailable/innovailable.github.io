@@ -50295,6 +50295,7 @@ exports.RtcGame = (function(superClass) {
     this.explosions = [];
     this.bombs = [];
     this.players = [];
+    this.powerups = [];
     this.field = [];
     for (y = i = 0; i <= 16; y = ++i) {
       this.field.push(new Array(this.width));
