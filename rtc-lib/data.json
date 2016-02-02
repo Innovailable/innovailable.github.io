@@ -614,7 +614,7 @@
             "module": "rtc",
             "namespace": "",
             "file": "src/stream.coffee",
-            "line": 7,
+            "line": 8,
             "description": "A wrapper around an HTML5 MediaStream",
             "is_constructor": 1,
             "params": [
@@ -1147,7 +1147,8 @@
             "params": [
                 {
                     "name": "data",
-                    "description": "The data received"
+                    "description": "The data received",
+                    "type": "ArrayBuffer"
                 }
             ],
             "class": "rtc.DataChannel",
@@ -1164,7 +1165,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 52,
+            "line": 56,
             "description": "Connect to the DataChannel. You will receive messages and will be able to send after calling this.",
             "itemtype": "method",
             "name": "connect",
@@ -1177,7 +1178,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 73,
+            "line": 77,
             "description": "The label of the DataChannel used to distinguish multiple channels",
             "itemtype": "method",
             "name": "label",
@@ -1190,7 +1191,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 82,
+            "line": 86,
             "description": "Send data to the peer through the DataChannel",
             "itemtype": "method",
             "name": "send",
@@ -1209,7 +1210,7 @@
         },
         {
             "file": "src/data_channel.coffee",
-            "line": 102,
+            "line": 106,
             "description": "Method which actually sends the data. Implements buffering",
             "itemtype": "method",
             "name": "_actualSend",
@@ -1474,7 +1475,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 107,
+            "line": 110,
             "description": "Add new signaling information received from remote peer",
             "itemtype": "method",
             "name": "signaling",
@@ -1490,7 +1491,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 122,
+            "line": 125,
             "description": "Add a remote ICE candidate",
             "itemtype": "method",
             "name": "addIceCandidate",
@@ -1506,7 +1507,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 136,
+            "line": 139,
             "description": "Returns the options for the offer/answer",
             "itemtype": "method",
             "name": "_oaOptions",
@@ -1521,7 +1522,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 152,
+            "line": 155,
             "description": "Set the remote description",
             "itemtype": "method",
             "name": "_setRemoteDescription",
@@ -1543,7 +1544,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 165,
+            "line": 168,
             "description": "Create offer, set it on local description and emit it",
             "itemtype": "method",
             "name": "_offer",
@@ -1554,7 +1555,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 179,
+            "line": 182,
             "description": "Create answer, set it on local description and emit it",
             "itemtype": "method",
             "name": "_offer",
@@ -1565,7 +1566,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 193,
+            "line": 196,
             "description": "Set local description and emit it",
             "itemtype": "method",
             "name": "_processLocalSdp",
@@ -1587,7 +1588,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 214,
+            "line": 217,
             "description": "Mark connection attempt as failed",
             "itemtype": "method",
             "name": "_connectError",
@@ -1605,7 +1606,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 227,
+            "line": 230,
             "description": "Add local stream",
             "itemtype": "method",
             "name": "addStream",
@@ -1621,7 +1622,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 236,
+            "line": 239,
             "description": "Remove local stream",
             "itemtype": "method",
             "name": "removeStream",
@@ -1637,7 +1638,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 245,
+            "line": 248,
             "description": "Add DataChannel. Will only actually do something if `offering` is `true`.",
             "itemtype": "method",
             "name": "addDataChannel",
@@ -1658,7 +1659,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 265,
+            "line": 268,
             "description": "Establish connection with remote peer. Connection will be established once both peers have called this functio",
             "itemtype": "method",
             "name": "connect",
@@ -1671,7 +1672,7 @@
         },
         {
             "file": "src/peer_connection.coffee",
-            "line": 284,
+            "line": 287,
             "description": "Close the connection to the remote peer",
             "itemtype": "method",
             "name": "close",
@@ -2042,7 +2043,28 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 19,
+            "line": 17,
+            "description": "Emitted when tracks are muted or unmuted. Only triggered when changes are\nmade through this objects mute functions.",
+            "itemtype": "event",
+            "name": "mute_changed",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of tracks which changed",
+                    "type": "'audio' | 'video' | 'both'"
+                },
+                {
+                    "name": "muted",
+                    "description": "`true` if tracks were muted, `false` if they were unmuted",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 28,
             "description": "Get the id of the stream. This is neither user defined nor human readable.",
             "itemtype": "method",
             "name": "id",
@@ -2055,7 +2077,7 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 28,
+            "line": 37,
             "description": "Checks whether the stream has any tracks of the given type",
             "itemtype": "method",
             "name": "hasTracks",
@@ -2077,7 +2099,7 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 38,
+            "line": 47,
             "description": "Gets the tracks of the given type",
             "itemtype": "method",
             "name": "getTracks",
@@ -2099,7 +2121,27 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 62,
+            "line": 68,
+            "description": "Checks whether a type of track is muted. If there are no tracks of the\nspecified type they will be considered muted",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The type of tracks",
+                    "type": "'audio' | 'video' | 'both'",
+                    "optional": true,
+                    "optdefault": "'audio'"
+                }
+            ],
+            "return": {
+                "description": "Whether the tracks are muted",
+                "type": "Boolean"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 83,
             "description": "Mutes or unmutes tracks of the stream",
             "itemtype": "method",
             "name": "mute",
@@ -2128,7 +2170,7 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 76,
+            "line": 99,
             "description": "Toggles the mute state of tracks of the stream",
             "itemtype": "method",
             "name": "toggleMute",
@@ -2150,7 +2192,7 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 93,
+            "line": 121,
             "description": "Stops the stream",
             "itemtype": "method",
             "name": "stop",
@@ -2159,7 +2201,34 @@
         },
         {
             "file": "src/stream.coffee",
-            "line": 105,
+            "line": 133,
+            "description": "Clones the stream. You can change both streams independently, for example\nmute tracks. You will have to `stop()` both streams individually when you\nare done.\n\nThis is currently not supported in Firefox and expected to be implemented\nin version 47. Use `Stream.canClone()` to check whether cloning is supported by\nyour browser.",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "A clone of the stream",
+                "type": "rtc.Stream"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 152,
+            "description": "Checks whether cloning stream is supported by the browser. See `clone()`\nfor details",
+            "static": 1,
+            "itemtype": "method",
+            "name": "canClone",
+            "return": {
+                "description": "`true` if cloning is supported, `false` otherwise",
+                "type": "Boolean"
+            },
+            "class": "rtc.Stream",
+            "module": "rtc"
+        },
+        {
+            "file": "src/stream.coffee",
+            "line": 163,
             "description": "Creates a stream using `getUserMedia()`",
             "itemtype": "method",
             "name": "createStream",
@@ -2188,6 +2257,10 @@
         {
             "message": "Missing item type\nAdds a timeout to a promise. The promise will be rejected if timeout is\nreached. It will act like the underlying promise if it is resolved or\nrejected before the timeout is reached.",
             "line": " src/internal/promise.coffee:53"
+        },
+        {
+            "message": "Missing item type\nChecks whether a type of track is muted. If there are no tracks of the\nspecified type they will be considered muted",
+            "line": " src/stream.coffee:68"
         }
     ]
 }

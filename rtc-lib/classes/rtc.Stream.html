@@ -103,7 +103,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_stream.coffee.html#l7"><code>src&#x2F;stream.coffee:7</code></a>
+            Defined in: <a href="../files/src_stream.coffee.html#l8"><code>src&#x2F;stream.coffee:8</code></a>
         </div>
 
             Module: <a href="../modules/rtc.html">rtc</a>
@@ -139,7 +139,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l7"><code>src&#x2F;stream.coffee:7</code></a>
+        <a href="../files/src_stream.coffee.html#l8"><code>src&#x2F;stream.coffee:8</code></a>
         </p>
 
 
@@ -178,6 +178,7 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
     <div>
@@ -188,6 +189,15 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_canClone">canClone</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_clone">clone</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_createStream">createStream</a>
 
@@ -222,11 +232,114 @@
 
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_mute_changed">mute_changed</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_canClone" class="method item">
+    <h3 class="name"><code>canClone</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_stream.coffee.html#l152"><code>src&#x2F;stream.coffee:152</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Checks whether cloning stream is supported by the browser. See <code>clone()</code>
+for details</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p><code>true</code> if cloning is supported, <code>false</code> otherwise</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_clone" class="method item">
+    <h3 class="name"><code>clone</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/rtc.Stream.html" class="crosslink">rtc.Stream</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_stream.coffee.html#l133"><code>src&#x2F;stream.coffee:133</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Clones the stream. You can change both streams independently, for example
+mute tracks. You will have to <code>stop()</code> both streams individually when you
+are done.</p>
+<p>This is currently not supported in Firefox and expected to be implemented
+in version 47. Use <code>Stream.canClone()</code> to check whether cloning is supported by
+your browser.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/rtc.Stream.html" class="crosslink">rtc.Stream</a></span>:
+                    <p>A clone of the stream</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_createStream" class="method item">
     <h3 class="name"><code>createStream</code></h3>
 
@@ -252,7 +365,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l105"><code>src&#x2F;stream.coffee:105</code></a>
+        <a href="../files/src_stream.coffee.html#l163"><code>src&#x2F;stream.coffee:163</code></a>
         </p>
 
 
@@ -328,7 +441,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l38"><code>src&#x2F;stream.coffee:38</code></a>
+        <a href="../files/src_stream.coffee.html#l47"><code>src&#x2F;stream.coffee:47</code></a>
         </p>
 
 
@@ -395,7 +508,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l28"><code>src&#x2F;stream.coffee:28</code></a>
+        <a href="../files/src_stream.coffee.html#l37"><code>src&#x2F;stream.coffee:37</code></a>
         </p>
 
 
@@ -456,7 +569,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l19"><code>src&#x2F;stream.coffee:19</code></a>
+        <a href="../files/src_stream.coffee.html#l28"><code>src&#x2F;stream.coffee:28</code></a>
         </p>
 
 
@@ -508,7 +621,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l62"><code>src&#x2F;stream.coffee:62</code></a>
+        <a href="../files/src_stream.coffee.html#l83"><code>src&#x2F;stream.coffee:83</code></a>
         </p>
 
 
@@ -578,7 +691,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l93"><code>src&#x2F;stream.coffee:93</code></a>
+        <a href="../files/src_stream.coffee.html#l121"><code>src&#x2F;stream.coffee:121</code></a>
         </p>
 
 
@@ -618,7 +731,7 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_stream.coffee.html#l76"><code>src&#x2F;stream.coffee:76</code></a>
+        <a href="../files/src_stream.coffee.html#l99"><code>src&#x2F;stream.coffee:99</code></a>
         </p>
 
 
@@ -665,6 +778,75 @@ rtc.MediaDomElement($('video'), stream);</code></pre>
 
 
 
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_mute_changed" class="events item">
+                        <h3 class="name"><code>mute_changed</code></h3>
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>type</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>muted</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_stream.coffee.html#l17"><code>src&#x2F;stream.coffee:17</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Emitted when tracks are muted or unmuted. Only triggered when changes are
+                    made through this objects mute functions.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">type</code>
+                                            <span class="type">'audio' | 'video' | 'both'</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The type of tracks which changed</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">muted</code>
+                                            <span class="type">Boolean</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p><code>true</code> if tracks were muted, <code>false</code> if they were unmuted</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>

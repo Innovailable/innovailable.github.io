@@ -103,6 +103,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 {compat} = require(&#x27;./compat&#x27;)
+{EventEmitter} = require(&#x27;events&#x27;)
 
 
 ###*
@@ -115,7 +116,15 @@
 # @constructor
 # @param {RTCDataStream} stream The native stream
 ###
-class exports.Stream
+class exports.Stream extends EventEmitter
+
+  ###*
+  # Emitted when tracks are muted or unmuted. Only triggered when changes are
+  # made through this objects mute functions.
+  # @event mute_changed
+  # @param {&#x27;audio&#x27; | &#x27;video&#x27; | &#x27;both&#x27;} type The type of tracks which changed
+  # @param {Boolean} muted &#x60;true&#x60; if tracks were muted, &#x60;false&#x60; if they were unmuted
+  ###
 
   constructor: (@stream) -&gt;
 
@@ -149,18 +158,30 @@ class exports.Stream
     type = type.toLowerCase()
 
     if type == &#x27;audio&#x27;
-      return @stream_p.then (stream) -&gt;
-        return stream.getAudioTracks()
+      return @stream.getAudioTracks()
     else if type == &#x27;video&#x27;
-      return @stream_p.then (stream) -&gt;
-        return stream.getVideoTracks()
+      return @stream.getVideoTracks()
     else if type == &#x27;both&#x27;
-      return @stream_p.then (stream) -&gt;
-        video = stream.getVideoTracks()
-        vaudio = stream.getAudioTracks()
-        return video.concat(audio)
+      video = @stream.getVideoTracks()
+      vaudio = @stream.getAudioTracks()
+      return video.concat(audio)
     else
       throw new Error(&quot;Invalid stream part &#x27;&quot; + type + &quot;&#x27;&quot;)
+
+
+  ###*
+  # Checks whether a type of track is muted. If there are no tracks of the
+  # specified type they will be considered muted
+  # @param {&#x27;audio&#x27; | &#x27;video&#x27; | &#x27;both&#x27;} [type=&#x27;audio&#x27;] The type of tracks
+  # @return {Boolean} Whether the tracks are muted
+  ###
+  muted: (type=&#x27;audio&#x27;) -&gt;
+    tracks = @getTracks(type)
+
+    if tracks.length &lt; 1
+      return true
+
+    return not tracks[0]?.enabled
 
 
   ###*
@@ -171,8 +192,10 @@ class exports.Stream
   # @return {Boolean} Whether the tracks were muted or unmuted
   ###
   mute: (muted=true, type=&#x27;audio&#x27;) -&gt;
-    for track in getTracks(type)
+    for track in @getTracks(type)
       track.enabled = not muted
+
+    @emit(&#x27;mute_changed&#x27;, type, muted)
 
     return muted
 
@@ -184,12 +207,17 @@ class exports.Stream
   # @return {Boolean} Whether the tracks were muted or unmuted
   ###
   toggleMute: (type=&#x27;audio&#x27;) -&gt;
-    tracks = getTracks(type)
+    tracks = @getTracks(type)
+
+    if tracks.length &lt; 1
+      return true
 
     muted = not tracks[0]?.enabled
 
     for track in tracks
       track.enabled = not muted
+
+    @emit(&#x27;mute_changed&#x27;, type, muted)
 
     return muted
 
@@ -204,6 +232,36 @@ class exports.Stream
         track.stop()
     else
       @stream.stop()
+
+
+  ###*
+  # Clones the stream. You can change both streams independently, for example
+  # mute tracks. You will have to &#x60;stop()&#x60; both streams individually when you
+  # are done.
+  #
+  # This is currently not supported in Firefox and expected to be implemented
+  # in version 47. Use &#x60;Stream.canClone()&#x60; to check whether cloning is supported by
+  # your browser.
+  #
+  # @method clone
+  # @return {rtc.Stream} A clone of the stream
+  ###
+  clone: () -&gt;
+    if not @stream.clone?
+      throw new Error(&quot;Your browser does not support stream cloning. Firefox is expected to implement it in version 47.&quot;)
+
+    return new Stream(@stream.clone())
+
+
+  ###*
+  # Checks whether cloning stream is supported by the browser. See &#x60;clone()&#x60;
+  # for details
+  # @static
+  # @method canClone
+  # @return {Boolean} &#x60;true&#x60; if cloning is supported, &#x60;false&#x60; otherwise
+  ###
+  @canClone: () -&gt;
+    return compat.MediaStream.prototype.clone?
 
 
   ###*
@@ -224,6 +282,7 @@ class exports.Stream
         resolve(new Stream(native_stream))
 
       compat.getUserMedia(config, success, reject)
+
 
     </pre>
 </div>
